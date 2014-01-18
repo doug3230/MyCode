@@ -95,3 +95,32 @@ class Matrix:
         assert matrix_util.is_table_data(values), "Cannot make a Matrix object using non-tabular values."
         self._data = values
         return
+    
+    def rows(self):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        return len(self._data)
+    
+    def cols(self):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        return len(self._data[0])
+     
