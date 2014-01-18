@@ -123,4 +123,35 @@ class Matrix:
         -------------------------------------------------------
         """
         return len(self._data[0])
-     
+    
+    def is_same_size(self, other):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        same_rows = self.rows() == other.rows()
+        same_cols = self.cols() == other.cols()
+        return (same_rows and same_cols)
+    
+    def is_square(self):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """ 
+        return (self.rows() == self.cols())
+        
+        
