@@ -8,8 +8,5 @@ Email:   doug3230@mylaurier.ca
 Version: 2014-01-17
 -------------------------------------------------------
 """
-#[import statements]
+from matrix import Matrix
 
-#[constants]
-
-#[rest of program code]
