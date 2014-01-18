@@ -10,7 +10,7 @@ Version: 2014-01-17
 import copy
 import matrix_util
 
-#[constants]
+# [constants]
 
 class Matrix:
     """
@@ -59,10 +59,12 @@ class Matrix:
         length = matrix_util.max_str_length(self._data)
         string_form = ""
         for row in self._data:
-            string_form += "|{0:^{1}}".format(row[0],length)
+            string_form += "|{0:^{1}}".format(row[0], length)
             for entry in row[1:]:
-                string_form += ", {0:^{1}}".format(entry,length)
+                string_form += ", {0:^{1}}".format(entry, length)
             string_form += "|\n"
+        # remove extra newline
+        string_form = string_form[:-1]
         return string_form
         
     def get_data(self):
@@ -214,7 +216,7 @@ class Matrix:
         for i in range(self.rows()):
             new_row = []
             for j in range(self.cols()):
-                new_row.append(self.entry(i,j) + other.entry(i,j))
+                new_row.append(self.entry(i, j) + other.entry(i, j))
             addition_values.append(new_row)
         return Matrix(addition_values)
     
@@ -235,7 +237,7 @@ class Matrix:
         for i in range(self.rows()):
             new_row = []
             for j in range(self.cols()):
-                new_row.append(self.entry(i,j) - other.entry(i,j))
+                new_row.append(self.entry(i, j) - other.entry(i, j))
             subtraction_values.append(new_row)
         return Matrix(subtraction_values)
                 
@@ -254,28 +256,28 @@ class Matrix:
         assert self.valid_index(row, col), "Cannot pivot matrix at invalid index."
         assert self._data[row][col] != 0, "Cannot pivot matrix using a 0 entry."
         
-        #copy matrix data into 2d list
+        # copy matrix data into 2d list
         values = self.to_2d_list()
         
-        #divide pivot row by pivot entry to get a 1
+        # divide pivot row by pivot entry to get a 1
         entry = values[row][col]
         for j in range(self.cols()):
             values[row][j] /= entry
         
-        #adjust rows before pivot row
+        # adjust rows before pivot row
         for i in range(row):
             mul = values[i][col]
             if mul == 0: continue
             
             for j in range(self.cols()):
-                values[i][j] -= mul*values[row][j]
+                values[i][j] -= mul * values[row][j]
         
         for i in range(row + 1, self.rows()):
             mul = values[i][col]
             if mul == 0: continue
             
             for j in range(self.cols()):
-                values[i][j] -= mul*values[row][j]
+                values[i][j] -= mul * values[row][j]
         return Matrix(values)
         
         
