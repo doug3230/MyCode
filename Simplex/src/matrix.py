@@ -7,7 +7,6 @@ Email:   doug3230@mylaurier.ca
 Version: 2014-01-17
 -------------------------------------------------------
 """
-import os
 import copy
 import matrix_util
 
@@ -23,7 +22,7 @@ class Matrix:
     public variables:
         [variable name - description of variable]
     public methods:
-        [method name - description of method] 
+        Matrix(values) - constructs a Matrix object using a 2d array of numerical values.
     -------------------------------------------------------
     """
     
@@ -34,7 +33,7 @@ class Matrix:
         called in main program using Matrix(values)
         -------------------------------------------------------
         Preconditions:
-           values - a two-dimensional array of numerical data. 
+           values - a two-dimensional array of numerical values. 
                     (the two-dimensional array's inner arrays 
                      must all be of the same length.)
         Postconditions:
