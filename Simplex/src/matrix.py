@@ -77,8 +77,21 @@ class Matrix:
         -------------------------------------------------------
         """
         return copy.deepcopy(self._data) 
-        
     
+    def to_2d_list(self):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """ 
+        return [list(self._data[i]) for i in range(len(self._data))]
+        
     def set_data(self, values):
         """
         -------------------------------------------------------
@@ -94,7 +107,7 @@ class Matrix:
         """ 
         assert not matrix_util.is_empty_data(values), "Cannot make a Matrix object without values."
         assert matrix_util.is_table_data(values), "Cannot make a Matrix object using non-tabular values."
-        self._data = values
+        self._data = tuple(tuple(values[i]) for i in range(len(values)))
         return
     
     def rows(self):
@@ -122,6 +135,37 @@ class Matrix:
         -------------------------------------------------------
         """
         return len(self._data[0])
+    
+    def valid_index(self, row, col):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """ 
+        valid_row = (0 <= row < self.rows())
+        valid_col = (0 <= col < self.cols())
+        return (valid_row and valid_col)
+        
+    def entry(self, row, col):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        assert self.valid_index(row, col), "Cannot access element at invalid index."
+        return self._data[row][col] 
     
     def is_same_size(self, other):
         """
@@ -170,7 +214,7 @@ class Matrix:
         for i in range(self.rows()):
             new_row = []
             for j in range(self.cols()):
-                new_row.append(self._data[i][j] + other._data[i][j])
+                new_row.append(self.entry(i,j) + other.entry(i,j))
             addition_values.append(new_row)
         return Matrix(addition_values)
     
@@ -191,8 +235,50 @@ class Matrix:
         for i in range(self.rows()):
             new_row = []
             for j in range(self.cols()):
-                new_row.append(self._data[i][j] - other._data[i][j])
+                new_row.append(self.entry(i,j) - other.entry(i,j))
             subtraction_values.append(new_row)
         return Matrix(subtraction_values)
                 
+    def pivot(self, row, col):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        assert self.valid_index(row, col), "Cannot pivot matrix at invalid index."
+        assert self._data[row][col] != 0, "Cannot pivot matrix using a 0 entry."
+        
+        #copy matrix data into 2d list
+        values = self.to_2d_list()
+        
+        #divide pivot row by pivot entry to get a 1
+        entry = values[row][col]
+        for j in range(self.cols()):
+            values[row][j] /= entry
+        
+        #adjust rows before pivot row
+        for i in range(row):
+            mul = values[i][col]
+            if mul == 0: continue
+            
+            for j in range(self.cols()):
+                values[i][j] -= mul*values[row][j]
+        
+        for i in range(row + 1, self.rows()):
+            mul = values[i][col]
+            if mul == 0: continue
+            
+            for j in range(self.cols()):
+                values[i][j] -= mul*values[row][j]
+        return Matrix(values)
+        
+        
+         
+        
         
