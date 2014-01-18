@@ -3,8 +3,9 @@
 [function library file name]
 [description of functions]
 -------------------------------------------------------
-Author:  Richard Douglas
-Email:   doug3230@mylaurier.ca
+Author:  your name
+ID:      your ID
+Email:   your Laurier email address
 Version: 2014-01-17
 -------------------------------------------------------
 """
@@ -12,15 +13,14 @@ Version: 2014-01-17
 
 #[constants]
 
-#def [function definition]:
+#class [class name]:
 #    """
 #    -------------------------------------------------------
-#    [function description]
+#    [class description]
 #    -------------------------------------------------------
-#    Preconditions:
-#       [parameter name - parameter description (parameter type and constraints)]
-#    Postconditions:
-#       [returns: or prints:]
-#       [return value name - return value description (return value type)] 
+#    public variables:
+#        [variable name - description of variable]
+#    public methods:
+#        [method name - description of method] 
 #    -------------------------------------------------------
 #    """
