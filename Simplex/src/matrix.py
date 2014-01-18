@@ -152,5 +152,47 @@ class Matrix:
         -------------------------------------------------------
         """ 
         return (self.rows() == self.cols())
-        
+    
+    def add(self, other):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        assert self.is_same_size(other), "Cannot perform addition on matrices with different dimensions."
+        addition_values = []
+        for i in range(self.rows()):
+            new_row = []
+            for j in range(self.cols()):
+                new_row.append(self._data[i][j] + other._data[i][j])
+            addition_values.append(new_row)
+        return Matrix(addition_values)
+    
+    def subtract(self, other):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        assert self.is_same_size(other), "Cannot perform subtraction on matrices with different dimensions."
+        subtraction_values = []
+        for i in range(self.rows()):
+            new_row = []
+            for j in range(self.cols()):
+                new_row.append(self._data[i][j] - other._data[i][j])
+            subtraction_values.append(new_row)
+        return Matrix(subtraction_values)
+                
         
