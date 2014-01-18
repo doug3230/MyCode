@@ -7,6 +7,7 @@ Email:   doug3230@mylaurier.ca
 Version: 2014-01-17
 -------------------------------------------------------
 """
+import os
 import copy
 import matrix_util
 
@@ -43,6 +44,27 @@ class Matrix:
         self.set_data(values)
         return
     
+    def __str__(self):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        length = matrix_util.max_str_length(self._data)
+        string_form = ""
+        for row in self._data:
+            string_form += "|{0:^{1}}".format(row[0],length)
+            for entry in row[1:]:
+                string_form += ", {0:^{1}}".format(entry,length)
+            string_form += "|\n"
+        return string_form
+        
     def get_data(self):
         """
         -------------------------------------------------------
