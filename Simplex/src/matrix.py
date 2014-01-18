@@ -22,19 +22,19 @@ class Matrix:
     public variables:
         [variable name - description of variable]
     public methods:
-        Matrix(values) - constructs a Matrix object using a 2d array of numerical values.
+        Matrix(values) - constructs a Matrix object using a 2d list of numerical values.
     -------------------------------------------------------
     """
     
     def __init__(self, values):
         """
         -------------------------------------------------------
-        constructs a Matrix object using values from a 2D array.
+        constructs a Matrix object using values from a 2D list.
         called in main program using Matrix(values)
         -------------------------------------------------------
         Preconditions:
-           values - a two-dimensional array of numerical values. 
-                    (the two-dimensional array's inner arrays 
+           data - a two-dimensional list of numerical values (float[][]) 
+                    (the two-dimensional list's inner lists 
                      must all be of the same length.)
         Postconditions:
            returns a new Matrix object storing the data. 
@@ -46,13 +46,14 @@ class Matrix:
     def __str__(self):
         """
         -------------------------------------------------------
-        [method description]
+        Converts matrix to string form for printing.
+        The string form consists of a small table with entries
+        separated by commas as denoted in standard Linear Algebra books.
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           none
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns matrix as a string (string)
         -------------------------------------------------------
         """
         length = matrix_util.max_str_length(self._data)
@@ -67,13 +68,12 @@ class Matrix:
     def get_data(self):
         """
         -------------------------------------------------------
-        [method description]
+        Returns a copy of the matrix's data in a 2d list.
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           none
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns matrix's numerical values in a 2d list (float[][])
         -------------------------------------------------------
         """
         return copy.deepcopy(self._data) 
@@ -82,13 +82,14 @@ class Matrix:
     def set_data(self, values):
         """
         -------------------------------------------------------
-        [method description]
+        Changes this matrix's values to those passed in.
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           values - a 2d list of numerical values (float[][]) 
+                    (values must have inner lists that all have the 
+                    same length and must have at least one value) 
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           matrix discards its old data and sets the values as its new data
         -------------------------------------------------------
         """ 
         assert not matrix_util.is_empty_data(values), "Cannot make a Matrix object without values."
@@ -99,13 +100,12 @@ class Matrix:
     def rows(self):
         """
         -------------------------------------------------------
-        [method description]
+        The number of rows in this matrix
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           none
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           return the number of rows in the matrix (int)
         -------------------------------------------------------
         """
         return len(self._data)
@@ -113,13 +113,12 @@ class Matrix:
     def cols(self):
         """
         -------------------------------------------------------
-        [method description]
+        The number of columns in this matrix
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           none
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           return the number of columns in the matrix (int)
         -------------------------------------------------------
         """
         return len(self._data[0])
@@ -127,13 +126,13 @@ class Matrix:
     def is_same_size(self, other):
         """
         -------------------------------------------------------
-        [method description]
+        is this matrix the same size as the other?
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           other - the Matrix to compare with (Matrix)
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns True if matrix and other have the same number of rows and columns,
+                   False otherwise (boolean)
         -------------------------------------------------------
         """
         same_rows = self.rows() == other.rows()
@@ -143,13 +142,13 @@ class Matrix:
     def is_square(self):
         """
         -------------------------------------------------------
-        [method description]
+        is this matrix is a square Matrix?
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           none
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns True if matrix has the same number of rows as it has columns,
+                   False otherwise (boolean)
         -------------------------------------------------------
         """ 
         return (self.rows() == self.cols())
