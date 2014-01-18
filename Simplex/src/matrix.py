@@ -1,11 +1,10 @@
 """
 -------------------------------------------------------
-[function library file name]
-[description of functions]
+[class file name]
+[description of classes]
 -------------------------------------------------------
-Author:  your name
-ID:      your ID
-Email:   your Laurier email address
+Author:  Richard Douglas
+Email:   doug3230@mylaurier.ca
 Version: 2014-01-17
 -------------------------------------------------------
 """
