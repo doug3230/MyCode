@@ -8,6 +8,7 @@ Version: 2014-01-17
 -------------------------------------------------------
 """
 import copy
+import matrix_util
 
 #[constants]
 
@@ -69,43 +70,7 @@ class Matrix:
            [return value name - return value description (return value type)] 
         -------------------------------------------------------
         """ 
-        assert not is_empty_data(values), "Cannot make a Matrix object without values."
-        assert is_table_data(values), "Cannot make a Matrix object using non-tabular values."
+        assert not matrix_util.is_empty_data(values), "Cannot make a Matrix object without values."
+        assert matrix_util.is_table_data(values), "Cannot make a Matrix object using non-tabular values."
         self._data = values
         return
-    
-def is_empty_data(data):
-    """
-    -------------------------------------------------------
-    [function description]
-    -------------------------------------------------------
-    Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
-    Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
-    -------------------------------------------------------
-    """
-    return (data == [[]])
-    
-
-def is_table_data(data):
-    """
-    -------------------------------------------------------
-     [function description]
-    -------------------------------------------------------
-    Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
-    Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
-    -------------------------------------------------------
-    """
-    if (data == [[]]):
-        return True
-    else:
-        i = 1
-        rows = len(data[0])
-        while i < len(data) and len(data[i]) == rows:
-            i += 1
-        return (i == len(data))
