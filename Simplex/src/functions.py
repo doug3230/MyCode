@@ -10,7 +10,7 @@ Version: 2014-01-17
 """
 from matrix import Matrix
 
-COMMANDS = (("Clear", "Clears all matrices from memory.")
+COMMANDS = (("Clear", "Clears all matrices from memory."),
             ("Help", "Display commands and descriptions."), 
             ("Load", "Load a new matrix."),
             ("Pivot", "Perform a pivot on the matrix."),
