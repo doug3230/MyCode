@@ -199,7 +199,7 @@ class Matrix:
         """ 
         return (self.rows() == self.cols())
     
-    def add(self, other):
+    def __add__(self, other):
         """
         -------------------------------------------------------
         [method description]
@@ -220,7 +220,7 @@ class Matrix:
             addition_values.append(new_row)
         return Matrix(addition_values)
     
-    def subtract(self, other):
+    def __sub__(self, other):
         """
         -------------------------------------------------------
         [method description]

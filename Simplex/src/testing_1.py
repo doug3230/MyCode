@@ -52,14 +52,14 @@ for i in range(len(ADD_TESTS)):
     left = ADD_TESTS[i][0]
     right = ADD_TESTS[i][1]
     print("{0}:".format(ADD_TEST_NAMES[i]))
-    print(left.add(right))
+    print(left + right)
     print()
     
 for i in range(len(SUB_TESTS)):
     left = SUB_TESTS[i][0]
     right = SUB_TESTS[i][1]
     print("{0}:".format(SUB_TEST_NAMES[i]))
-    print(left.subtract(right))
+    print(left - right)
     print()
     
 for i in range(len(TEST_MATRICES)):
