@@ -1,27 +1,28 @@
 """
 -------------------------------------------------------
-[function library file name]
-[description of main_functions]
+matrix_functions
+A library of functions to help with the matrix class.
+These are functions that wouldn't really be considered
+to be matrix operations but are used in carrying out
+matrix operations (helper functions so to speak.)
 -------------------------------------------------------
 Author:  Richard Douglas
 Email:   doug3230@mylaurier.ca
 Version: 2014-01-17
 -------------------------------------------------------
 """
-#[import statements]
-
-#[constants]
 
 def is_empty_data(data):
     """
     -------------------------------------------------------
-    [function description]
+    determines if a 2d data structure doesn't
+    have any values and thus cannot be used to
+    construct a matrix.
     -------------------------------------------------------
     Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
+       data - a 2d data structure meant to contain numbers (float[][])
     Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
+       return True if data has no values, False otherwise.
     -------------------------------------------------------
     """
     return (data == [] or data == [[]])
@@ -30,13 +31,13 @@ def is_empty_data(data):
 def is_table_data(data):
     """
     -------------------------------------------------------
-     [function description]
+    determines if a 2d data structure is in tabular form.
+    that is, its rows all have the same length. 
     -------------------------------------------------------
     Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
+       data - a collection of numbers (float[][])
     Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
+       returns True if data is in tabular form, False otherwise.
     -------------------------------------------------------
     """
     if (data == [[]]):
@@ -51,13 +52,14 @@ def is_table_data(data):
 def max_str_length(data):
     """
     -------------------------------------------------------
-    [function description]
+    determines the largest string width needed
+    when printing numbers as a matrix.
     -------------------------------------------------------
     Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
+       data - a collection of numbers (float[][])
     Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
+       returns the maximum number of characters needed
+               when printing the values in data.
     -------------------------------------------------------
     """
     assert not is_empty_data(data), "No data means no length."

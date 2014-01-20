@@ -8,7 +8,7 @@ Version: 2014-01-17
 -------------------------------------------------------
 """
 import copy
-import matrix_util
+import matrix_functions
 
 # [constants]
 
@@ -56,7 +56,7 @@ class Matrix:
            returns matrix as a string (string)
         -------------------------------------------------------
         """
-        length = matrix_util.max_str_length(self._data)
+        length = matrix_functions.max_str_length(self._data)
         string_form = ""
         for row in self._data:
             string_form += "|{0:^{1}}".format(row[0], length)
@@ -107,8 +107,8 @@ class Matrix:
            matrix discards its old data and sets the values as its new data
         -------------------------------------------------------
         """ 
-        assert not matrix_util.is_empty_data(values), "Cannot make a Matrix object without values."
-        assert matrix_util.is_table_data(values), "Cannot make a Matrix object using non-tabular values."
+        assert not matrix_functions.is_empty_data(values), "Cannot make a Matrix object without values."
+        assert matrix_functions.is_table_data(values), "Cannot make a Matrix object using non-tabular values."
         self._data = tuple(tuple(values[i]) for i in range(len(values)))
         return
     
