@@ -8,7 +8,7 @@ Email:   doug3230@mylaurier.ca
 Version: 2014-01-17
 -------------------------------------------------------
 """
-import functions
+import main_functions
 
 PROMPT = ">> "
 matrix_states = []
@@ -19,15 +19,15 @@ command = input(PROMPT).lower()
 while command != "quit":
     try:
         if command == "help":
-            functions.print_help()
+            main_functions.print_help()
         elif command == "clear":
             matrix_states = []
         elif command == "load":
-            rows, cols = functions.prompt_for_size()
-            matrix = functions.prompt_for_matrix(rows, cols)
+            rows, cols = main_functions.prompt_for_size()
+            matrix = main_functions.prompt_for_matrix(rows, cols)
             matrix_states.append(matrix)
         elif command == "pivot":
-            r, c = functions.prompt_for_location()
+            r, c = main_functions.prompt_for_location()
             cur_matrix = matrix_states[-1]
             pivoted_matrix = cur_matrix.pivot(r, c)
             matrix_states.append(pivoted_matrix)

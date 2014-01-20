@@ -1,7 +1,8 @@
 """
 -------------------------------------------------------
-[function library file name]
-[description of functions]
+main_functions.py
+A library of functions for use in the main program.
+These functions are mainly for performing I/O tasks.
 -------------------------------------------------------
 Author:  Richard Douglas
 Email:   doug3230@mylaurier.ca
@@ -10,6 +11,7 @@ Version: 2014-01-17
 """
 from matrix import Matrix
 
+#command names and descriptions
 COMMANDS = (("Clear", "Clears all matrices from memory."),
             ("Help", "Display commands and descriptions."), 
             ("Load", "Load a new matrix."),
@@ -18,6 +20,17 @@ COMMANDS = (("Clear", "Clears all matrices from memory."),
             ("Undo", "Change to previous matrix."))
 
 def print_help():
+    """
+    -------------------------------------------------------
+    prints each command name and a description of what it does.
+    -------------------------------------------------------
+    Preconditions:
+       none
+    Postconditions:
+       prints each command name and description on a line.
+       one line per command. 
+    -------------------------------------------------------
+    """
     for command in COMMANDS:
         print("{0}: {1}".format(command[0], command[1]))
     return
@@ -25,13 +38,13 @@ def print_help():
 def prompt_for_size():
     """
     -------------------------------------------------------
-    [function description]
+    asks the user for the number of rows and columns.
     -------------------------------------------------------
     Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
+       none
     Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
+       returns a tuple containing the number of rows and columns
+               entered by the user in (rows, cols) format.
     -------------------------------------------------------
     """ 
     rows = int(input("Enter the number of rows: "))
@@ -41,13 +54,14 @@ def prompt_for_size():
 def prompt_for_location():
     """
     -------------------------------------------------------
-    [function description]
+    asks the user which entry of a matrix they would like to
+    do stuff with.
     -------------------------------------------------------
     Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
+       none
     Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
+       returns a tuple containing the row index and column index
+               entered by the user in (row_index, column_index) format.
     -------------------------------------------------------
     """
     row_index = int(input("Enter the row index: "))
@@ -57,13 +71,13 @@ def prompt_for_location():
 def prompt_for_matrix(rows, cols):
     """
     -------------------------------------------------------
-    [function description]
+    prompts the user for the entries to put in the matrix.
     -------------------------------------------------------
     Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
+       rows - the number of rows the matrix will have (int > 0)
+       cols - the number of columns the matrix will have (int > 0)
     Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
+       returns a matrix with the values entered by the user. 
     -------------------------------------------------------
     """
     values = []
