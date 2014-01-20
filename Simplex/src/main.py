@@ -1,7 +1,14 @@
 """
 -------------------------------------------------------
-[program file name]
-[description of main program]
+main
+A simple program for working with matrices.
+Allows the user to load matrices, and pivot
+on their entries in order to carry out the
+Simplex algorithm.
+
+This is also handy for solving systems of
+equations since pivoting really just corresponds
+to doing a step of Gaussian Elimination.
 -------------------------------------------------------
 Author:  Richard Douglas
 Email:   doug3230@mylaurier.ca
