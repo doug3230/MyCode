@@ -1,7 +1,15 @@
 """
 -------------------------------------------------------
-[program file name]
-[description of main program]
+testing_1
+Tests the Matrix class and its operations including:
+-__str__()
+-rows()
+-cols()
+-is_square()
+-is_same_size()
+-__add__()
+-__sub__()
+-pivot()
 -------------------------------------------------------
 Author:  Richard Douglas
 Email:   doug3230@mylaurier.ca

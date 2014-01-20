@@ -1,27 +1,26 @@
 """
 -------------------------------------------------------
-[function library file name]
-[description of main_functions]
+test_functions
+A library of functions for performing testing.
 -------------------------------------------------------
 Author:  Richard Douglas
 Email:   doug3230@mylaurier.ca
 Version: 2014-01-18
 -------------------------------------------------------
 """
-#[import statements]
-
-#[constants]
 
 def pivot_test(matrix, matrix_name = "matrix"):
     """
     -------------------------------------------------------
-    [function description]
+    Takes a matrix and shows what happens when you pivot on
+    each of the matrix's nonzero entries.
     -------------------------------------------------------
     Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
+       matrix - an arbitrary Matrix object (Matrix)
     Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
+       prints the Matrix objects returned when you call the
+              pivot operation on matrix at each of its nonzero
+              entries.
     -------------------------------------------------------
     """
     for i in range(matrix.rows()):
