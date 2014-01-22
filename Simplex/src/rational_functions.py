@@ -8,7 +8,7 @@ Email:   doug3230@mylaurier.ca
 Version: 2014-01-21
 -------------------------------------------------------
 """
-from rational import Rational
+import rational
 from math import pow
 
 #[constants]
@@ -73,11 +73,11 @@ def parse_float(value):
     
     int_comp = int(comps[0])
     if (len(comps) == 0):
-        return Rational(int_comp)
+        return rational.Rational(int_comp)
     else:
         dec_comp = int(comps[1])
         tens = len(dec_comp)
     
         num = (int_comp * tens) + dec_comp
         den =  (pow(10, tens))
-        return Rational(num, den)
+        return rational.Rational(num, den)

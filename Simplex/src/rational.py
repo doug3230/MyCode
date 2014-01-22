@@ -8,7 +8,7 @@ Email:   doug3230@mylaurier.ca
 Version: 2014-01-21
 -------------------------------------------------------
 """
-from rational_functions import normalize
+import rational_functions
 
 #[constants]
 
@@ -37,7 +37,7 @@ class Rational:
         -------------------------------------------------------
         """
         assert den != 0, "denominator cannot be 0"
-        num, den = normalize(num, den)
+        num, den = rational_functions.normalize(int(num), int(den))
         self._num = num
         self._den = den
         return
@@ -55,9 +55,9 @@ class Rational:
         -------------------------------------------------------
         """
         if self.is_int():
-            return str(self._den)
+            return str(self._num)
         else:
-            return "{0} / {1}".format(self._num, self._den)
+            return "{0:d} / {1:d}".format(self._num, self._den)
           
     def num(self):
         """
