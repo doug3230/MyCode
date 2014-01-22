@@ -37,9 +37,9 @@ class Rational:
         -------------------------------------------------------
         """
         assert den != 0, "denominator cannot be 0"
-        num, den = rational_functions.normalize(int(num), int(den))
-        self._num = num
-        self._den = den
+        num, den = rational_functions.normalize(num, den)
+        self._num = int(num)
+        self._den = int(den)
         return
     
     def __str__(self):

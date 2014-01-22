@@ -10,4 +10,4 @@ Version: 2014-01-22
 """
 from rational import Rational
 
-print(Rational(5,2))
+print(Rational(int(5),int(2)))
