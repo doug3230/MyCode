@@ -25,13 +25,13 @@ def gcd(a, b):
        [return value name - return value description (return value type)] 
     -------------------------------------------------------
     """
-    assert a != 0 and b != 0, "gcd(0, 0) is not defined."
+    assert a != 0 or b != 0, "gcd(0, 0) is not defined."
     a, b = abs(a), abs(b)
     return gcd_aux(max(a, b), min(a, b))
 
 def gcd_aux(a, b):
-    if (a % b == 0):
-        return b
+    if (b == 0):
+        return a
     else:
         return gcd_aux(b, a % b)
 
@@ -75,9 +75,10 @@ def parse_float(value):
     if (len(comps) == 0):
         return rational.Rational(int_comp)
     else:
-        dec_comp = int(comps[1])
-        tens = len(dec_comp)
+        dec_string = (comps[1])
+        tens = len(dec_string)
+        dec_comp = int(dec_string)
     
-        num = (int_comp * tens) + dec_comp
         den =  (pow(10, tens))
+        num = (int_comp * den) + dec_comp
         return rational.Rational(num, den)

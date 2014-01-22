@@ -135,7 +135,7 @@ class Rational:
         new_den = (self._den * other._den)
         return Rational(new_num,  new_den)
     
-    def __div__(self, other):
+    def __truediv__(self, other):
         """
         -------------------------------------------------------
         [method description]
@@ -225,3 +225,18 @@ class Rational:
         -------------------------------------------------------
         """ 
         return (self._den == 1)  
+    
+    def to_float(self):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """ 
+        return (self._num / self._den)
+        
