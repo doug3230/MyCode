@@ -82,3 +82,22 @@ def parse_float(value):
         den =  (pow(10, tens))
         num = (int_comp * den) + dec_comp
         return rational.Rational(num, den)
+
+def parse_string(str_value):
+    """
+    -------------------------------------------------------
+    [function description]
+    -------------------------------------------------------
+    Preconditions:
+       [parameter name - parameter description (parameter type and constraints)]
+    Postconditions:
+       [returns: or prints:]
+       [return value name - return value description (return value type)] 
+    -------------------------------------------------------
+    """
+    comps = str_value.split("/")
+    assert len(comps) <= 2, "Cannot parse {0} as Rational".format(str_value) 
+    if (len(comps) == 1):
+        return rational.Rational(int(comps[0]))
+    else:
+        return rational.Rational(int(comps[0]), int(comps))
