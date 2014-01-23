@@ -12,9 +12,9 @@ Version: 2014-01-17
 from matrix import Matrix
 import rational_functions
 
-#command names and descriptions
+# command names and descriptions
 COMMANDS = (("Clear", "Clears all matrices from memory."),
-            ("Help", "Display commands and descriptions."), 
+            ("Help", "Display commands and descriptions."),
             ("Load", "Load a new matrix."),
             ("Load Rows", "Load a new matrix, entering values row by row.")
             ("Pivot", "Perform a pivot on the matrix."),

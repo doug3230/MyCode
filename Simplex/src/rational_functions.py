@@ -11,7 +11,7 @@ Version: 2014-01-21
 import rational
 from math import pow
 
-#[constants]
+# [constants]
 
 def gcd(a, b):
     """
@@ -79,7 +79,7 @@ def parse_float(value):
         tens = len(dec_string)
         dec_comp = int(dec_string)
     
-        den =  (pow(10, tens))
+        den = (pow(10, tens))
         num = (int_comp * den) + dec_comp
         return rational.Rational(num, den)
 

@@ -10,7 +10,7 @@ Version: 2014-01-21
 """
 import rational_functions
 
-#[constants]
+# [constants]
 
 class Rational:
     """
@@ -24,7 +24,7 @@ class Rational:
     -------------------------------------------------------
     """
     
-    def __init__(self, num, den = 1):
+    def __init__(self, num, den=1):
         """
         -------------------------------------------------------
         [method description]
@@ -133,7 +133,7 @@ class Rational:
         """
         new_num = (self._num * other._num)
         new_den = (self._den * other._den)
-        return Rational(new_num,  new_den)
+        return Rational(new_num, new_den)
     
     def __truediv__(self, other):
         """

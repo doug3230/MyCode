@@ -9,7 +9,7 @@ Version: 2014-01-18
 -------------------------------------------------------
 """
 
-def pivot_test(matrix, matrix_name = "matrix"):
+def pivot_test(matrix, matrix_name="matrix"):
     """
     -------------------------------------------------------
     Takes a matrix and shows what happens when you pivot on
