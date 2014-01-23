@@ -202,10 +202,32 @@ class Rational:
            [return value name - return value description (return value type)] 
         -------------------------------------------------------
         """
-        lhs = (self._num * other._den)
-        rhs = (other._num * self._den)
-        return (lhs < rhs) 
+        try:
+            lhs = (self._num * other._den)
+            rhs = (other._num * self._den)
+            return (lhs < rhs)
+        except AttributeError:
+            return self.less_than_number(other)
+    
+    def less_than_number(self, value):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        if (value == int(value)):
+            rat_form = Rational(value)
+        else:
+            rat_form = rational_functions.parse_float(value)
+        return (self < rat_form)
         
+    
     def __le__(self, other):
         """
         -------------------------------------------------------

@@ -6,14 +6,12 @@ Created on Jan 23, 2014
 import unittest
 
 from rational import Rational as Rat
-from rational_functions import gcd
+from rational_functions import gcd, normalize
 
 class RatTest(unittest.TestCase):
 
-
     def setUp(self):
         pass
-
 
     def tearDown(self):
         pass
@@ -36,6 +34,12 @@ class RatTest(unittest.TestCase):
         self.assertEqual(gcd(7,0),7, "0 left case not handled properly")
         self.assertEqual(gcd(0,7),7, "0 right case not handled properly")
         self.assertRaises(AssertionError, gcd, 0, 0)
+        pass
+    
+    def testNormalize(self):
+        self.assertEqual(normalize(2,4), (1,2))
+        self.assertEqual(normalize(0,-9999), (0,1))
+        self.assertEqual(normalize(59, -2), (-59, 2))
         pass
 
 if __name__ == "__main__":
