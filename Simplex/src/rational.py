@@ -10,8 +10,6 @@ Version: 2014-01-21
 """
 import rational_functions
 
-# [constants]
-
 class Rational:
     """
     -------------------------------------------------------
@@ -39,6 +37,7 @@ class Rational:
         assert num == int(num), "numerator must be an integer"
         assert den != 0, "denominator cannot be 0"
         num, den = rational_functions.normalize(num, den)
+        #by default has them as floats for some reason
         self._num = int(num)
         self._den = int(den)
         return
