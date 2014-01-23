@@ -101,7 +101,7 @@ class Rational:
         -------------------------------------------------------
         """
         new_num = (self._num * other._den) + (self._den * other._num)
-        new_den = (self._num * other._den)
+        new_den = (self._den * other._den)
         return Rational(new_num, new_den)
     
     def __sub__(self, other):

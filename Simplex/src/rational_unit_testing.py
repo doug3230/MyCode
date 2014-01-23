@@ -26,7 +26,9 @@ class RatTest(unittest.TestCase):
         self.assertEqual(1.23456, Rat(123456, 100000), "Cannot compare to floats left")
         self.assertEqual(Rat(1,2), 0.5, "Cannot compare to floats right")
         pass
-
+    
+    def testGCD(self):
+        pass
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
