@@ -16,7 +16,7 @@ import rational_functions
 COMMANDS = (("Clear", "Clears all matrices from memory."),
             ("Help", "Display commands and descriptions."),
             ("Load", "Load a new matrix."),
-            ("Load Rows", "Load a new matrix, entering values row by row.")
+            ("Load Rows", "Load a new matrix, entering values row by row."),
             ("Pivot", "Perform a pivot on the matrix."),
             ("Quit", "Quit program."),
             ("Undo", "Undo previous command"))
