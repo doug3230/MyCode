@@ -97,7 +97,10 @@ def parse_string(str_value):
     """
     comps = str_value.split("/")
     assert len(comps) <= 2, "Cannot parse {0} as Rational".format(str_value) 
+    
+    comps[0] = comps[0].strip()
     if (len(comps) == 1):
         return rational.Rational(int(comps[0]))
     else:
+        comps[1] = comps[1].strip()
         return rational.Rational(int(comps[0]), int(comps[1]))
