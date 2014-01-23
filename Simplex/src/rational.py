@@ -36,6 +36,7 @@ class Rational:
            [return value name - return value description (return value type)] 
         -------------------------------------------------------
         """
+        assert num == int(num), "numerator must be an integer"
         assert den != 0, "denominator cannot be 0"
         num, den = rational_functions.normalize(num, den)
         self._num = int(num)
@@ -169,14 +170,25 @@ class Rational:
             same_den = (self._den == other._den)
             return same_num and same_den
         except AttributeError:
-            return self.equals_integer(other)
+            return self.equals_number(other)
         
-    
-    def equals_integer(self, integer):
-        if not self.is_int():
-            return False
+    def equals_number(self, value):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        if (value == int(value)):
+            rat_form = Rational(value)
         else:
-            return (self._num == integer)
+            rat_form = rational_functions.parse_float(value)
+        return (self == rat_form)
     
     def __lt__(self, other):
         """
