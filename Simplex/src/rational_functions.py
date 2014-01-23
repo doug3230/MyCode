@@ -100,4 +100,4 @@ def parse_string(str_value):
     if (len(comps) == 1):
         return rational.Rational(int(comps[0]))
     else:
-        return rational.Rational(int(comps[0]), int(comps))
+        return rational.Rational(int(comps[0]), int(comps[1]))

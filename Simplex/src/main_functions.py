@@ -10,6 +10,7 @@ Version: 2014-01-17
 -------------------------------------------------------
 """
 from matrix import Matrix
+import rational_functions
 
 #command names and descriptions
 COMMANDS = (("Clear", "Clears all matrices from memory."),
@@ -85,13 +86,17 @@ def prompt_for_matrix(rows, cols):
         row = []
         for j in range(cols):
             entry = input("Enter entry ({0}, {1}): ".format(i, j))
-            if entry.startswith("-") and entry[1:].isdigit():
-                entry = int(entry)
-            elif entry.isdigit():
-                entry = int(entry)
+            if ("." in entry):
+                rat_value = rational_functions.parse_float(entry)
             else:
-                entry = float(entry)
-            row.append(entry)
+                rat_value = rational_functions.parse_string(entry) 
+#             if entry.startswith("-") and entry[1:].isdigit():
+#                 entry = int(entry)
+#             elif entry.isdigit():
+#                 entry = int(entry)
+#             else:
+#                 entry = float(entry)
+            row.append(rat_value)
         values.append(row)
     return Matrix(values)
     

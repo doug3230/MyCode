@@ -44,7 +44,9 @@ while command != "quit":
         else:
             print('Invalid command, enter "Help" for a list of commands.')
     except Exception as inst:
+        print(type(inst).__name__)
         print("Error: {0}".format(inst))
+        
         
     if len(matrix_states) > 0:
         print(matrix_states[-1])

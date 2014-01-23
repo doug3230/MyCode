@@ -163,10 +163,20 @@ class Rational:
            [returns: or prints:]
            [return value name - return value description (return value type)] 
         -------------------------------------------------------
-        """ 
-        same_num = (self._num == other._num)
-        same_den = (self._den == other._den)
-        return same_num and same_den
+        """
+        try: 
+            same_num = (self._num == other._num)
+            same_den = (self._den == other._den)
+            return same_num and same_den
+        except AttributeError:
+            return self.equals_integer(other)
+        
+    
+    def equals_integer(self, integer):
+        if not self.is_int():
+            return False
+        else:
+            return (self._num == integer)
     
     def __lt__(self, other):
         """
