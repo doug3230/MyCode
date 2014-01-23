@@ -6,6 +6,7 @@ Created on Jan 23, 2014
 import unittest
 
 from rational import Rational as Rat
+from rational_functions import gcd
 
 class RatTest(unittest.TestCase):
 
@@ -28,6 +29,13 @@ class RatTest(unittest.TestCase):
         pass
     
     def testGCD(self):
+        self.assertEqual(gcd(21,49),7, "GCD(21, 49) needs to equal 7")
+        self.assertEqual(gcd(-21,49),7, "Single negative left case not working")
+        self.assertEqual(gcd(21,-49),7, "Single negative right case not working")
+        self.assertEqual(gcd(-21,-49),7, "Double negative case not working")
+        self.assertEqual(gcd(7,0),7, "0 left case not handled properly")
+        self.assertEqual(gcd(0,7),7, "0 right case not handled properly")
+        self.assertRaises(AssertionError, gcd, 0, 0)
         pass
 
 if __name__ == "__main__":
