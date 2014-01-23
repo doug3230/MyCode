@@ -16,9 +16,10 @@ import rational_functions
 COMMANDS = (("Clear", "Clears all matrices from memory."),
             ("Help", "Display commands and descriptions."), 
             ("Load", "Load a new matrix."),
+            ("Load Rows", "Load a new matrix, entering values row by row.")
             ("Pivot", "Perform a pivot on the matrix."),
             ("Quit", "Quit program."),
-            ("Undo", "Change to previous matrix."))
+            ("Undo", "Undo previous command"))
 
 def print_help():
     """
@@ -86,17 +87,50 @@ def prompt_for_matrix(rows, cols):
         row = []
         for j in range(cols):
             entry = input("Enter entry ({0}, {1}): ".format(i, j))
-            if ("." in entry):
-                rat_value = rational_functions.parse_float(entry)
-            else:
-                rat_value = rational_functions.parse_string(entry) 
-#             if entry.startswith("-") and entry[1:].isdigit():
-#                 entry = int(entry)
-#             elif entry.isdigit():
-#                 entry = int(entry)
-#             else:
-#                 entry = float(entry)
+            rat_value = convert_to_rational(entry) 
             row.append(rat_value)
         values.append(row)
     return Matrix(values)
+
+def prompt_for_matrix_row_by_row(rows, cols):
+    """
+    -------------------------------------------------------
+    [function description]
+    -------------------------------------------------------
+    Preconditions:
+       [parameter name - parameter description (parameter type and constraints)]
+    Postconditions:
+       [returns: or prints:]
+       [return value name - return value description (return value type)] 
+    -------------------------------------------------------
+    """
+    print("Enter values separated by commas.")
+    matrix_rows = []
+    for i in range(rows):
+        input_line = input("Row {0}:".format(i))
+        new_row = input_line.split(",")
+        assert len(new_row) == cols, "invalid row, wrong number of values"
+        for j in range(len(new_row)):
+            new_row[j] = new_row[j].strip()
+            new_row[j] = convert_to_rational(new_row[j])
+        matrix_rows.append(new_row)
+    return Matrix(matrix_rows)
     
+
+def convert_to_rational(str_value):
+    """
+    -------------------------------------------------------
+    [function description]
+    -------------------------------------------------------
+    Preconditions:
+       [parameter name - parameter description (parameter type and constraints)]
+    Postconditions:
+       [returns: or prints:]
+       [return value name - return value description (return value type)] 
+    -------------------------------------------------------
+    """ 
+    if ("." in str_value):
+        rat_value = rational_functions.parse_float(str_value)
+    else:
+        rat_value = rational_functions.parse_string(str_value)
+    return rat_value

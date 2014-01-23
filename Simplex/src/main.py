@@ -33,6 +33,10 @@ while command != "quit":
             rows, cols = main_functions.prompt_for_size()
             matrix = main_functions.prompt_for_matrix(rows, cols)
             matrix_states.append(matrix)
+        elif command == "load rows":
+            rows, cols = main_functions.prompt_for_size()
+            matrix = main_functions.prompt_for_matrix_row_by_row(rows, cols)
+            matrix_states.append(matrix)
         elif command == "pivot":
             r, c = main_functions.prompt_for_location()
             cur_matrix = matrix_states[-1]
