@@ -35,7 +35,9 @@ class Rational:
         -------------------------------------------------------
         """
         assert num == int(num), "numerator must be an integer"
+        assert den == int(den), "denominator must be an integer"
         assert den != 0, "denominator cannot be 0"
+        
         num, den = rational_functions.normalize(num, den)
         #by default has them as floats for some reason
         self._num = int(num)
@@ -116,7 +118,7 @@ class Rational:
         -------------------------------------------------------
         """
         new_num = (self._num * other._den) - (self._den * other._num)
-        new_den = (self._num * other._den)
+        new_den = (self._den * other._den)
         return Rational(new_num, new_den) 
         
     def __mul__(self, other):
