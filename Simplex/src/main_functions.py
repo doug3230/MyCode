@@ -134,3 +134,23 @@ def convert_to_rational(str_value):
     else:
         rat_value = rational_functions.parse_string(str_value)
     return rat_value
+
+def convert_to_floats(rat_matrix):
+    """
+    -------------------------------------------------------
+    [function description]
+    -------------------------------------------------------
+    Preconditions:
+       [parameter name - parameter description (parameter type and constraints)]
+    Postconditions:
+       [returns: or prints:]
+       [return value name - return value description (return value type)] 
+    -------------------------------------------------------
+    """
+    float_values = []
+    for row in rat_matrix.get_data():
+        float_row = []
+        for rat_value in row:
+            float_row.append(rat_value.to_float())
+        float_values.append(float_row)
+    return Matrix(float_values) 
