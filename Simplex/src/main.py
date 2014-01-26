@@ -45,6 +45,13 @@ while command != "quit":
         elif command == "undo":
             if len(matrix_states) > 0:
                 matrix_states.pop()
+        elif command == "print floats":
+            if len(matrix_states) == 0:
+                print("No values to print")
+            else:
+                rat_matrix = matrix_states[0]
+                float_matrix = main_functions.convert_to_floats(rat_matrix)
+                print(float_matrix)
         else:
             print('Invalid command, enter "Help" for a list of commands.')
     except Exception as inst:
@@ -52,6 +59,6 @@ while command != "quit":
         print("Error: {0}".format(inst))
         
         
-    if len(matrix_states) > 0:
+    if len(matrix_states) > 0 and command != "print floats":
         print(matrix_states[-1])
     command = input(PROMPT).lower()
