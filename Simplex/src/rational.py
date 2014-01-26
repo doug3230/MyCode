@@ -101,10 +101,13 @@ class Rational:
            [return value name - return value description (return value type)] 
         -------------------------------------------------------
         """
-        new_num = (self._num * other._den) + (self._den * other._num)
-        new_den = (self._den * other._den)
-        return Rational(new_num, new_den)
-    
+        try:
+            new_num = (self._num * other._den) + (self._den * other._num)
+            new_den = (self._den * other._den)
+            return Rational(new_num, new_den)
+        except AttributeError:
+            return (self + rational_functions.parse_number(other))
+        
     def __sub__(self, other):
         """
         -------------------------------------------------------
@@ -117,9 +120,12 @@ class Rational:
            [return value name - return value description (return value type)] 
         -------------------------------------------------------
         """
-        new_num = (self._num * other._den) - (self._den * other._num)
-        new_den = (self._den * other._den)
-        return Rational(new_num, new_den) 
+        try:
+            new_num = (self._num * other._den) - (self._den * other._num)
+            new_den = (self._den * other._den)
+            return Rational(new_num, new_den)
+        except AttributeError:
+            return (self - rational_functions.parse_number(other)) 
         
     def __mul__(self, other):
         """
@@ -133,9 +139,12 @@ class Rational:
            [return value name - return value description (return value type)] 
         -------------------------------------------------------
         """
-        new_num = (self._num * other._num)
-        new_den = (self._den * other._den)
-        return Rational(new_num, new_den)
+        try:
+            new_num = (self._num * other._num)
+            new_den = (self._den * other._den)
+            return Rational(new_num, new_den)
+        except AttributeError:
+            return (self * rational_functions.parse_number(other)) 
     
     def __truediv__(self, other):
         """
@@ -149,10 +158,13 @@ class Rational:
            [return value name - return value description (return value type)] 
         -------------------------------------------------------
         """
-        assert other != Rational(0), "cannot divide by 0."
-        new_num = (self._num * other._den)
-        new_den = (self._den * other._num) 
-        return Rational(new_num, new_den)
+        try:
+            assert not other.is_zero(), "cannot divide by 0."
+            new_num = (self._num * other._den)
+            new_den = (self._den * other._num) 
+            return Rational(new_num, new_den)
+        except AttributeError:
+            return (self / rational_functions.parse_number(other)) 
     
     def __eq__(self, other):
         """
@@ -171,25 +183,7 @@ class Rational:
             same_den = (self._den == other._den)
             return same_num and same_den
         except AttributeError:
-            return self.equals_number(other)
-        
-    def equals_number(self, value):
-        """
-        -------------------------------------------------------
-        [method description]
-        -------------------------------------------------------
-        Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
-        Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
-        -------------------------------------------------------
-        """
-        if (value == int(value)):
-            rat_form = Rational(value)
-        else:
-            rat_form = rational_functions.parse_float(value)
-        return (self == rat_form)
+            return (self == rational_functions.parse_number(other))
     
     def __lt__(self, other):
         """
@@ -208,27 +202,8 @@ class Rational:
             rhs = (other._num * self._den)
             return (lhs < rhs)
         except AttributeError:
-            return self.less_than_number(other)
-    
-    def less_than_number(self, value):
-        """
-        -------------------------------------------------------
-        [method description]
-        -------------------------------------------------------
-        Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
-        Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
-        -------------------------------------------------------
-        """
-        if (value == int(value)):
-            rat_form = Rational(value)
-        else:
-            rat_form = rational_functions.parse_float(value)
-        return (self < rat_form)
+            return (self < rational_functions.parse_number(other))
         
-    
     def __le__(self, other):
         """
         -------------------------------------------------------
