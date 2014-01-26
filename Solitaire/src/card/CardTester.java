@@ -17,12 +17,14 @@ public class CardTester {
 			Card badRank = new Card(9001, "Spades");
 			fail("invalid Card 9001 of Spades accepted as valid");
 		} catch (Exception e) {
+			System.out.println("Exception: " + e);
 		}
 
 		try {
 			Card badSuit = new Card(2, "Polar Bears");
 			fail("invalid Card 2 of Polar Bears accepted as valid");
 		} catch (Exception e) {
+			System.out.println("Exception: " + e);
 		}
 	}
 }
