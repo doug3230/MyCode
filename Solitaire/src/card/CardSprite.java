@@ -1,7 +1,5 @@
 package card;
 
-import java.awt.Image;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -34,18 +32,27 @@ public class CardSprite extends JLabel {
 	}
 
 	public void setCard(Card card) {
-		this.card = card;
+		setIcon(CardIconFactory.createCardIcon(deckFolder, card));
+		setSize(getWidth(), getHeight());
 	}
 
 	public void setDeckFolder(String deckFolder) {
 		this.deckFolder = deckFolder;
+		setIcon(CardIconFactory.createCardIcon(deckFolder, card));
+		setSize(getWidth(), getHeight());
 	}
 
-	public void resizeIcon() {
-		ImageIcon icon = (ImageIcon) getIcon();
-		Image image = icon.getImage();
-		Image resizedImage = image.getScaledInstance(getWidth(), getHeight(),
-				Image.SCALE_SMOOTH);
-		setIcon(new ImageIcon(resizedImage));
+	public void setSize(int width, int height) {
+		super.setSize(width, height);
+		ImageIcon oldIcon = (ImageIcon) this.getIcon();
+		this.setIcon(CardIconFactory.createResizedIcon(oldIcon, width, height));
+	}
+
+	public void setWidth(int width) {
+		setSize(width, getHeight());
+	}
+
+	public void setHeight(int height) {
+		setSize(getWidth(), height);
 	}
 }
