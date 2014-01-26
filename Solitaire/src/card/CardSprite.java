@@ -42,13 +42,6 @@ public class CardSprite extends JLabel {
 		setSize(getWidth(), getHeight());
 	}
 
-	public void setIcon(Icon icon) {
-		if (!(icon instanceof ImageIcon))
-			throw new RuntimeException(
-					"CardSprite is only meant to have ImageIcons as Icons.");
-		super.setIcon(icon);
-	}
-
 	public void setSize(int width, int height) {
 		super.setSize(width, height);
 		ImageIcon oldIcon = (ImageIcon) this.getIcon();
