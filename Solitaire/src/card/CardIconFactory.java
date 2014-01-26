@@ -37,14 +37,6 @@ public class CardIconFactory {
 		return new ImageIcon(fullPath(deckFolder, CARD_BACK));
 	}
 
-	public static ImageIcon createResizedIcon(ImageIcon icon, int width,
-			int height) {
-		Image image = icon.getImage();
-		Image resizedImage = image.getScaledInstance(width, height,
-				Image.SCALE_SMOOTH);
-		return new ImageIcon(resizedImage);
-	}
-
 	// Helper Methods
 	// --------------
 	private static String fullPath(String deckFolder, String fileName) {
