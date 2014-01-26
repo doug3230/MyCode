@@ -104,3 +104,21 @@ def parse_string(str_value):
     else:
         comps[1] = comps[1].strip()
         return rational.Rational(int(comps[0]), int(comps[1]))
+
+def parse_number(value):
+    """
+    -------------------------------------------------------
+    [function description]
+    -------------------------------------------------------
+    Preconditions:
+       [parameter name - parameter description (parameter type and constraints)]
+    Postconditions:
+       [returns: or prints:]
+       [return value name - return value description (return value type)] 
+    -------------------------------------------------------
+    """
+    if value == int(value):
+        return rational.Rational(value)
+    else:
+        return parse_float(value)
+    
