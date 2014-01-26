@@ -240,7 +240,35 @@ class Matrix:
                 new_row.append(self.entry(i, j) - other.entry(i, j))
             subtraction_values.append(new_row)
         return Matrix(subtraction_values)
-                
+    
+    def __mul__(self, other):
+        """
+        -------------------------------------------------------
+        [method description]
+        -------------------------------------------------------
+        Preconditions:
+           [parameter name - parameter description (parameter type and constraints)]
+        Postconditions:
+           [returns: or prints:]
+           [return value name - return value description (return value type)] 
+        -------------------------------------------------------
+        """
+        assert self.cols() == other.rows(), "Matrix multiplication not defined."
+        common_val = self.cols()
+        
+        a = self.get_data()
+        b = other.get_data()
+        new_matrix = []
+        for i in range(self.rows()):
+            new_row = []
+            for j in range(other.cols()):
+                value = 0
+                for k in range(common_val):
+                    value = a[i][k]*b[k][j] + value
+                new_row.append(value)
+            new_matrix.append(new_row)
+        return Matrix(new_matrix)
+        
     def pivot(self, row, col):
         """
         -------------------------------------------------------
