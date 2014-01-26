@@ -17,5 +17,19 @@ package card;
  */
 
 public class Card {
-
+	
+	//Constants
+	//---------
+	public static final int MIN_RANK = 1;
+	public static final int MAX_RANK = 13;
+	public static final String CLUBS = "Clubs";
+	public static final String DIAMONDS = "Diamonds";
+	public static final String HEARTS = "Hearts";
+	public static final String SPADES = "Spades";
+	public static final String[] SUITS = {CLUBS, DIAMONDS, HEARTS, SPADES};
+	
+	//Data Members
+	//------------
+	private int rank;
+	private String suit;
 }
