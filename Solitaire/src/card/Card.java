@@ -31,6 +31,14 @@ public class Card {
 	public static final String SPADES = "Spades";
 	/** An array of all suits. */
 	public static final String[] SUITS = { CLUBS, DIAMONDS, HEARTS, SPADES };
+	/** Ace rank. */
+	public static final int ACE = 1;
+	/** Jack rank. */
+	public static final int JACK = 11;
+	/** Queen rank. */
+	public static final int QUEEN = 12;
+	/** King rank. */
+	public static final int KING = 13;
 
 	// Data Members
 	// ------------
@@ -54,6 +62,32 @@ public class Card {
 
 	// Methods
 	// -------
+	/**
+	 * returns a String representation of Card of form "'rank' of 'suit'" taking
+	 * into account that certain ranks aren't interpretted as numbers. (e.g. A
+	 * rank of 1 corresponds to an "'ace' of 'suit'".)
+	 */
+	public String toString() {
+		String rankString;
+		switch (rank) {
+		case ACE:
+			rankString = "Ace";
+			break;
+		case JACK:
+			rankString = "Jack";
+			break;
+		case QUEEN:
+			rankString = "Queen";
+			break;
+		case KING:
+			rankString = "King";
+			break;
+		default:
+			rankString = new Integer(rank).toString();
+		}
+		return rankString + " of " + suit;
+	}
+
 	/** rank accessor. */
 	public int getRank() {
 		return rank;
@@ -93,12 +127,12 @@ public class Card {
 		this.suit = SUITS[i];
 	}
 
-	/** Is Card's suit red? */
+	/** Is Card's suit red (Diamonds or Hearts)? */
 	public boolean isRed() {
 		return (suit.equals(DIAMONDS) || suit.equals(HEARTS));
 	}
 
-	/** Is Card's suit black? */
+	/** Is Card's suit black (Clubs or Spades)? */
 	public boolean isBlack() {
 		return (suit.equals(CLUBS) || suit.equals(SPADES));
 	}
@@ -122,7 +156,32 @@ public class Card {
 	public boolean isSpades() {
 		return (suit.equals(SPADES));
 	}
-
+	
+	/** Is Card of the ace rank?*/
+	public boolean isAce() {
+		return (rank == ACE);
+	}
+	
+	/** Is Card of the jack rank?*/
+	public boolean isJack() {
+		return (rank == JACK);
+	}
+	
+	/** Is Card of the queen rank?*/
+	public boolean isQueen() {
+		return (rank == QUEEN);
+	}
+	
+	/** Is Card of the king rank?*/
+	public boolean isKing() {
+		return (rank == KING);
+	}
+	
+	/** Is Card not an ace, jack, queen, or king?*/
+	public boolean isNumber() {
+		return (rank > ACE && rank < JACK);
+	}
+	
 	/** Does this Card come right before the other Card in its suit? */
 	public boolean precedes(Card other) {
 		return (this.hasSameSuitAs(other) && this.rankPrecedes(other));
