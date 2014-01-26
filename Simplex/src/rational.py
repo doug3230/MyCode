@@ -1,7 +1,7 @@
 """
 -------------------------------------------------------
-[class file name]
-[description of classes]
+rational.py
+contains code for the Rational class.
 -------------------------------------------------------
 Author:  Richard Douglas
 Email:   doug3230@mylaurier.ca
@@ -13,25 +13,36 @@ import rational_functions
 class Rational:
     """
     -------------------------------------------------------
-    [class description]
+    This class models fractions used in math.
+    It has two attributes:
+    -numerator (the top of the fraction)
+    -denominator (the bottom of the fraction)
+    Both of these are integers with the denominator not being 0.
     -------------------------------------------------------
-    public variables:
-        [variable name - description of variable]
     public methods:
-        [method name - description of method] 
+        Rational(num, den = 1) - Initializes Rational.
+        str                    - Converts Rational to string form.
+        num                    - Rational's numerator.
+        den                    - Rational's denominator.
+        
     -------------------------------------------------------
     """
     
     def __init__(self, num, den=1):
         """
         -------------------------------------------------------
-        [method description]
+        Initializes Rational.
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           num - the passed in numerator (int)
+           den - the passed in denominator (int != 0)
+                 (den is optional and defaults to 1)
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           Constructs an instance of the Rational class. 
+           
+           The passed in numerator and denominator are modified
+           using the normalize() function to ensure consistency
+           and make Rationals easier to work with.
         -------------------------------------------------------
         """
         assert num == int(num), "numerator must be an integer"
@@ -39,7 +50,7 @@ class Rational:
         assert den != 0, "denominator cannot be 0"
         
         num, den = rational_functions.normalize(num, den)
-        #by default has them as floats for some reason
+        # by default has them as floats for some reason
         self._num = int(num)
         self._den = int(den)
         return
@@ -47,13 +58,11 @@ class Rational:
     def __str__(self):
         """
         -------------------------------------------------------
-        [method description]
+        Converts Rational to string form.
         -------------------------------------------------------
-        Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - If Rational is an integer, the string form of that integer.
+                     Otherwise returns a string of form "'num' / 'den'" (string)
         -------------------------------------------------------
         """
         if self.is_int():
@@ -64,13 +73,10 @@ class Rational:
     def num(self):
         """
         -------------------------------------------------------
-        [method description]
+        Rational's numerator.
         -------------------------------------------------------
-        Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - the top number of the fraction (int)
         -------------------------------------------------------
         """
         return self._num 
@@ -78,13 +84,10 @@ class Rational:
     def den(self):
         """
         -------------------------------------------------------
-        [method description]
+        Rational's denominator.
         -------------------------------------------------------
-        Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - the bottom number of the fraction (int)
         -------------------------------------------------------
         """ 
         return self._den
@@ -106,7 +109,7 @@ class Rational:
             new_den = (self._den * other._den)
             return Rational(new_num, new_den)
         except AttributeError:
-            return (self + rational_functions.parse_number(other))
+            return (self +rational_functions.parse_number(other))
         
     def __sub__(self, other):
         """
@@ -125,7 +128,7 @@ class Rational:
             new_den = (self._den * other._den)
             return Rational(new_num, new_den)
         except AttributeError:
-            return (self - rational_functions.parse_number(other)) 
+            return (self -rational_functions.parse_number(other)) 
         
     def __mul__(self, other):
         """
