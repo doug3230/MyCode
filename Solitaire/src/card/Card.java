@@ -39,7 +39,6 @@ public class Card {
 
 	// Methods
 	// -------
-
 	public int getRank() {
 		return rank;
 	}
@@ -49,7 +48,7 @@ public class Card {
 	}
 
 	public void setRank(int rank) {
-		if (rank < MIN_RANK && MAX_RANK < rank)
+		if (rank < MIN_RANK || MAX_RANK < rank)
 			throw new RuntimeException("Card rank must be between " + MIN_RANK
 					+ " and " + MAX_RANK + " (inclusive)");
 		this.rank = rank;
