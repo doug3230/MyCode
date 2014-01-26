@@ -1,0 +1,230 @@
+\documentclass{article}[12pt,a4paper]
+%\usepackage{a4wide}
+\usepackage{fullpage}
+\usepackage{tikz}
+\usepackage{amssymb}
+
+\title{MA372 Submission Problems}
+\author{Richard Douglas}
+\date{January 24,  2014} %defaults to \today
+
+\begin{document}
+  \maketitle
+  \begin{enumerate}
+  	\item Consider a linear program of the form
+	        $$\mbox{Maximize } z = \mathbf{c} \cdot \mathbf{x}$$
+                    subject to
+	        $$A\mathbf{x} \le \mathbf{b}$$
+	        $$\mathbf{x} \ge 0,$$
+	       where $\mathbf{b} \ge \mathbf{0}$. Prove that if $\mathbf{x}^{(1)} ,\mathbf{x}^{(2)} , \dots ,\mathbf{x}^{(k)}$ 	
+	       are optimum solutions to this linear program, then any convex combination of them is also an optimum solution.
+	       \newline
+	       
+	\item Follow the directions of the January 17 discussion problem, but use the following tableaux instead:
+		(tableaux included at start of each part of my solution for Question 2.)
+		\newline
+	
+	\item Let (LP1) denote the following program:
+	        $$\mbox{Maximize } z = \mathbf{c} \cdot \mathbf{x}$$
+	        subject to
+	        $$A\mathbf{x} \le \mathbf{b}$$
+	        $$\mathbf{x} \ge 0,$$
+	         where $\mathbf{b} \ge \mathbf{0}$.
+	         \begin{enumerate}
+	         \item[(a)] Let (LP2) denote the linear program obtained from (LP1) by replacing $b_i$ with
+		$b_i + \delta_i$, where $\delta_i \in \mathbb{R}$ for each $1 \le i \le m$. Determine conditions 
+		under which an optimum basis for (LP1) is also an optimum basis for (LP2), and 	
+		determine the new optimum solution in this case.
+		
+		\item[(b)] Let (LP3) denote the linear program obtained from (LP1) by replacing $c_j$ with
+		$c_j + \Delta_j$ , where $\Delta_j \in \mathbb{R}$ for each $1 \le j \le n$
+		Determine conditions under which an optimum basis for (LP1) is also an optimum basis for (LP3), 
+		and determine the value of the new objective function in this case.
+	         \end{enumerate}
+  \end{enumerate}
+  
+  \begin{enumerate}
+  \pagebreak
+  	\item Let $k \in \mathbb{N}$ be arbitrary and suppose that $\mathbf{x}^{(1)} ,\mathbf{x}^{(2)} , \dots ,\mathbf{x}^{(k)}$
+  	are optimum solutions to the linear program. Define $z^*$ to be the optimum objective value. That is to say,
+  	
+  	$$z^* = z(\mathbf{x}^{(1)}) =  z(\mathbf{x}^{(2)}) = \dots = z(\mathbf{x}^{(k)})$$
+  	
+  	Let $\mathbf x'$ be any convex combination of $\mathbf{x}^{(1)} ,\mathbf{x}^{(2)} , \dots , \mbox{ and } 
+  	\mathbf{x}^{(k)}$.
+  	That is, $\mathbf x'$ is of form
+  	$$\mathbf x' = \Sigma_{i = 1}^{k}{t_i\mathbf{x}^{(i)}} \mbox{ where } 0 \le t_i \le 1 \mbox{ and }
+  	 \Sigma_{i = 1}^{k}{t_i} = 1 $$
+  
+  	$\mathbf{x' \mbox{\textbf{ is feasible:}}}$
+  	
+  	\begin{itemize}
+  	\item Clearly $\mathbf x' \ge 0$ because $\mathbf{x}^{(i)} \ge 0 \mbox{ and } t_i \ge 0 \mbox{ for all } i$
+  	\item $A\mathbf x' = A(t_1\mathbf x^{(1)} + t_2\mathbf x^{(2)} + \dots + t_k\mathbf x^{(k)}) = 
+  		t_1A\mathbf x^{(1)} + t_2A\mathbf x^{(2)} + \dots + t_kA\mathbf x^{(k)}$
+  	\item Since $\mathbf x^{(i)}$ is feasible for all $i \mbox{ } (\Rightarrow A\mathbf x^{(i)} \le b$),  
+		$$A\mathbf x' \le t_1b + t_2b + \dots + t_kb = (t_1 + t_2 + \dots + t_k)b = b$$
+	\item Thus $\mathbf x'$ is feasible. \newline
+  	\end{itemize}
+  	
+  	$\mathbf{x' \mbox{\textbf{ maximizes the objective function:}}}$
+  	
+  	\begin{itemize}
+  	\item Since the objective function is linear,
+  	$$z(\mathbf x') = z(\Sigma_{i = 1}^{k}{t_i\mathbf x^{(i)}}) = \Sigma_{i = 1}^{k}{t_iz(\mathbf x^{(i)})}
+  		= \Sigma_{i = 1}^{k}{t_iz^*} = z^*\Sigma_{i = 1}^{k}{t_i} = z^*$$
+	\item $z^*$ is the optimum objective value and thus $\mathbf x'$ maximizes $z$. \newline
+  	\end{itemize}
+  	
+  	$\mathbf x'$ is feasible and maximizes $z$. Therefore, by definition, $\mathbf x'$ is an optimum solution.
+  	Since $k$ and $\mathbf x'$ were arbitrary, we have that any convex combination of any finite number of
+  	optimum solutions is an optimum solution.
+  	\pagebreak
+  	
+  	\item
+  	
+  	(a)
+		\begin{center}
+ 		\begin{tabular}{l | c | c c c c c c | c}
+             		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			     & $1$ & $0$ & $0$   & $-2$ & $0$  & $-3$     & $5$     & $15$  \\ \hline
+  			$x_4$ & $0$ & $0$ & $0$   & $1$    & $1$      & $0$     & $-2$     & $5$ \\
+  			$x_1$ & $0$ & $1$ & $0$  & $2$    & $0$      & $-1$     & $3$     & $2$ \\
+  			$x_2$ & $0$ & $0$ & $1$ & $-1$    & $0$      & $-5$     & $1$     & $4$ \\
+  		\end{tabular}
+  		\end{center}
+
+	This LP is unbounded because the objective row entry in column 5 is negative and all of the
+	entries in the column are nonpositive. An infinite set of feasible solutions for which the objective
+	function can become arbitrarily large is as follows:
+	
+	$$\{(x_1 = 2 + t, x_2 = 4 + 5t, x_3 = 0) \mbox{ : } t \ge 0\}$$
+	
+	For a given choice of $t$, this causes the objective value to become $15 + 3t$. The objective value can thus 
+	be made as large as we like by choosing $t$ sufficiently large. \newline
+	
+	(b)
+		\begin{center}
+ 		\begin{tabular}{l | c | c c c c c c | c}
+             		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			     & $1$ & $0$ & $0$   & $-2$ & $0$  & $-3$     & $5$     & $15$  \\ \hline
+  			$x_4$ & $0$ & $0$ & $0$   & $1$    & $1$      & $0$     & $-2$     & $1$ \\
+  			$x_1$ & $0$ & $1$ & $0$  & $2$    & $0$      & $1$     & $3$     & $2$ \\
+  			$x_2$ & $0$ & $0$ & $1$ & $-1$    & $0$      & $2$     & $1$     & $4$ \\
+  		\end{tabular}
+  		\end{center}
+  		
+	Pivoting at row $1$, column $3$ gives us the tableau
+	
+		\begin{center}
+ 		\begin{tabular}{l | c | c c c c c c | c}
+             		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			     & $1$ & $0$ & $0$   & $0$ & $2$  & $-3$     & $1$     & $17$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $1$      & $0$     & $-2$     & $1$ \\
+  			$x_1$ & $0$ & $1$ & $0$  & $0$    & $-2$      & $1$     & $7$     & $0$ \\
+  			$x_2$ & $0$ & $0$ & $1$ & $0$    & $1$      & $2$     & $-1$     & $5$ \\
+  		\end{tabular}
+  		\end{center}
+  		
+	If we now pivot at row $2$, column $5$
+	
+		\begin{center}
+ 		\begin{tabular}{l | c | c c c c c c | c}
+             		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			     & $1$ & $3$ & $0$   & $0$ & $-4$  & $0$     & $22$     & $17$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $1$      & $0$     & $-2$     & $1$ \\
+  			$x_5$ & $0$ & $1$ & $0$  & $0$    & $-2$      & $1$     & $7$     & $0$ \\
+  			$x_2$ & $0$ & $-2$ & $1$ & $0$    & $5$      & $0$     & $-15$     & $5$ \\
+  		\end{tabular}
+  		\end{center}
+  		
+	At this point it is clear that the LP is degenerate since the bases $\{x_1, x_2, x_3\}$ and $\{x_2, x_3, x_5\}$
+	both give us the same basic solution of $x_1 = 0, x_2 = 5, x_3 = 1, x_4 = 0, x_5 = 0, x_6 = 0$ \newline
+	\pagebreak
+	
+	(c)
+  		\begin{center}
+ 		\begin{tabular}{l | c | c c c c c c | c}
+             		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			     & $1$ & $-4$ & $0$   & $1$ & $0$  & $0$     & $2$     & $7$  \\ \hline
+  			$x_4$ & $0$ & $0$ & $0$   & $1$    & $1$      & $0$     & $-2$     & $3$ \\
+  			$x_5$ & $0$ & $1$ & $0$  & $2$    & $0$      & $1$     & $3$     & $2$ \\
+  			$x_2$ & $0$ & $-1$ & $1$ & $-3$    & $0$      & $0$     & $-2$     & $2$ \\
+  		\end{tabular}
+  		\end{center}
+  		
+  	Pivoting at row $2$, column $1$ gives us
+  		
+		\begin{center}
+ 		\begin{tabular}{l | c | c c c c c c | c}
+             		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			     & $1$ & $0$ & $0$   & $9$ & $0$  & $4$     & $14$     & $15$  \\ \hline
+  			$x_4$ & $0$ & $0$ & $0$   & $1$    & $1$      & $0$     & $-2$     & $3$ \\
+  			$x_1$ & $0$ & $1$ & $0$  & $2$    & $0$      & $1$     & $3$     & $2$ \\
+  			$x_2$ & $0$ & $0$ & $1$ & $-1$    & $0$      & $1$     & $1$     & $4$ \\
+  		\end{tabular}
+  		\end{center}
+  		
+	The entries of the objective row are now all nonnegative, and there is no way to create
+	another optimum solution (as the objective entries in the nonbasic variable columns are positive.) 
+	The unique optimum solution is thus $x_1 = 2, x_2 = 4, x_3 = 0$ where the maximum objective value is $15$. \newline
+	
+	(d)
+  		\begin{center}
+ 		\begin{tabular}{l | c | c c c c c c | c}
+             		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			     & $1$ & $0$ & $0$   & $0$ & $2$  & $4$     & $0$     & $20$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $2$   & $1$    & $3$      & $0$     & $0$     & $5$ \\
+  			$x_1$ & $0$ & $1$ & $-3$  & $0$    & $0$      & $-1$     & $0$     & $1$ \\
+  			$x_6$ & $0$ & $0$ & $1$ & $0$    & $-1$      & $2$     & $1$     & $2$ \\
+  		\end{tabular}
+  		\end{center}
+  		
+	From the tableau, we see that $x_1 = 1, x_2 = 0, x_3 = 5$ is an optimum solution.
+	However if we pivot at row $3$, column $2$ we get
+	
+		\begin{center}
+ 		\begin{tabular}{l | c | c c c c c c | c}
+             		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			     & $1$ & $0$ & $0$   & $0$ & $2$  & $4$     & $0$     & $20$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $5$      & $-4$     & $-2$     & $1$ \\
+  			$x_1$ & $0$ & $1$ & $0$  & $0$    & $-3$      & $5$     & $3$     & $7$ \\
+  			$x_2$ & $0$ & $0$ & $1$ & $0$    & $-1$      & $2$     & $1$     & $2$ \\
+  		\end{tabular}
+  		\end{center}
+	
+	And so $x_1 = 7, x_2 = 2, x_3 = 1$ is also an optimum solution. An infinite set of optimum
+	solutions is thus given by the set of convex combinations
+	$$\{(x_1 = t + 7(1-t), x_2 = 0t + 2(1-t), x_3 = 5t + 1(1-t)) \mbox{ : } 0 \le t \le 1\}$$
+	$$= \{(x_1 = 7 - 6t, x_2 = 2(1 - t), x_3 = 4t + 1) \mbox{ : } 0 \le t \le 1\}$$
+	\pagebreak
+	
+	\item 
+	(a) Let $x_{i_1}, x_{i_2}, \dots, x_{i_n}$ be an ordered optimum basis for (LP1), and let $B$ be the
+	matrix formed by the columns of (LP1)'s tableau that correspond to $x_{i_1}, x_{i_2}, \dots, x_{i_n}$ 
+	with the columns of $B$ arranged in that order.
+	
+	Since only $b$ is changing, the operations which need to be performed in order to arrive at that basis ($B^{-1}$)
+	for (LP2) remain the same. By applying the Fundamental Insight, the objective row entries all remain the same
+	(meaning they all remain nonnegative), so the only thing that needs to be checked is if the basic solution is still feasible.
+	
+	This is true if and only if
+	$$B^{-1}(b + \delta) \ge 0$$
+	
+	(Where $\delta$ is the column vector formed by $\delta_i$ for $i = 1, 2, \dots, n$)
+	
+	If this condition holds then the optimum solution for (LP2) is
+	$$(x_{i_1}, x_{i_2}, \dots, x_{i_n}) = B^{-1}(b + \delta)$$ \newline
+	
+	(b) When $c$ is replaced by $c + \Delta$, the situation is similar to as in (a) except now
+	feasibility is unaffected and what needs to be checked is that the basic solution is still optimal.
+	
+	Letting $c^\Delta_B = [c_{i_1} + \Delta_{i_1}, c_{i_2} + \Delta_{i_2}, \dots, c_{i_n} + \Delta_{i_n}]$
+	
+	Applying the Fundamental Insight gives us that the basic solution is still optimal if the objective row is
+	still nonnegative which is true if and only if
+	$$c^\Delta_BB^{-1}A - (c + \Delta) \ge 0 \mbox{ and } c^\Delta_BB^{-1} \ge 0$$
+	
+	In which case the new objective value is $c^\Delta_BB^{-1}b$
+  \end{enumerate}
+\end{document}
