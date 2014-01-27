@@ -10,7 +10,7 @@ Version: 2014-01-17
 -------------------------------------------------------
 """
 from matrix import Matrix
-import rational_functions
+from rational import Rational
 
 # command names and descriptions
 COMMANDS = (("Clear", "Clears all matrices from memory."),
@@ -130,9 +130,9 @@ def convert_to_rational(str_value):
     -------------------------------------------------------
     """ 
     if ("." in str_value):
-        rat_value = rational_functions.parse_float(str_value)
+        rat_value = Rational.parse_number(str_value)
     else:
-        rat_value = rational_functions.parse_string(str_value)
+        rat_value = Rational.parse_string(str_value)
     return rat_value
 
 def convert_to_floats(rat_matrix):

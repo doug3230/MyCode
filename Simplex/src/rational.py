@@ -15,9 +15,10 @@ class Rational:
     """
     -------------------------------------------------------
     The Rational class models fractions used in math.
-    It has two attributes:
-    -numerator (the top of the fraction)
-    -denominator (the bottom of the fraction)
+    -------------------------------------------------------
+    Attributes:
+        num (the top of the fraction)
+        den (the bottom of the fraction)
     Both of these are integers with the denominator not being 0.
     -------------------------------------------------------
     Operations:
@@ -38,7 +39,7 @@ class Rational:
         is_positive            - Checks if Rational is greater than 0.
         is_int                 - Checks if Rational is an integer.
         to_float               - Rational as a floating point number.
-    
+    -------------------------------------------------------
     Static Operations:
         parse_number           - Converts a number to a Rational.
         parse_string           - Converts a string to a Rational.
@@ -60,7 +61,7 @@ class Rational:
         Note: to make working with Rationals easier, the stored
         numerator and denominator have no factors in common.
         Thus Rational(2,4) has the same numerator and denominator
-        as  Rational(1,2). Also, negative Rationals have their 
+        as Rational(1,2). Also, negative Rationals have their 
         numerators as negative and the 0 Rational has a denominator
         of 1.
         -------------------------------------------------------
