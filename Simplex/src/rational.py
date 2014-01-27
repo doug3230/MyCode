@@ -31,8 +31,10 @@ class Rational:
         ==                     - Test for equality.
         <                      - Less than comparator.
         <=                     - Less than or equal to comparator.
-                               - (and other comparators by extension.)
+                                 (and other comparators by extension.)
+        is_negative            - Checks if Rational is less than 0.
         is_zero                - Checks if Rational is equal to 0.
+        is_positive            - Checks if Rational is greater than 0.
         is_int                 - Checks if Rational is an integer.
         to_float               - Rational as a floating point number.
     -------------------------------------------------------
@@ -230,6 +232,21 @@ class Rational:
         """
         return (self < other or self == other)
     
+    def is_negative(self):
+        """
+        -------------------------------------------------------
+        Is self less than 0?
+        -------------------------------------------------------
+        Postconditions:
+           returns - True if the fraction corresponding to self is < 0,
+                     False otherwise.
+        
+        Note: This method is provided for convenience as it requires
+        less overhead than using < 0. 
+        -------------------------------------------------------
+        """
+        return (self._num < 0)
+    
     def is_zero(self):
         """
         -------------------------------------------------------
@@ -238,9 +255,27 @@ class Rational:
         Postconditions:
            returns - True if the fraction corresponding to self is 0,
                      False otherwise.
+        
+        Note: This method is provided for convenience as it requires
+        less overhead than using == 0. 
         -------------------------------------------------------
         """
         return (self._num == 0)
+    
+    def is_positive(self):
+        """
+        -------------------------------------------------------
+        Is self greater than 0?
+        -------------------------------------------------------
+        Postconditions:
+           returns - True if the fraction corresponding to self is > 0,
+                     False otherwise.
+        
+        Note: This method is provided for convenience as it requires
+        less overhead than using > 0. 
+        -------------------------------------------------------
+        """
+        return (self._num > 0)
     
     def is_int(self):
         """
