@@ -19,11 +19,12 @@ class Rational:
     -denominator (the bottom of the fraction)
     Both of these are integers with the denominator not being 0.
     -------------------------------------------------------
+    Accessors:
+        num                    - Rational's numerator.
+        den                    - Rational's denominator.
     Operations:
         Rational(num, den = 1) - Initializes Rational.
         str                    - Converts Rational to string form.
-        num                    - Rational's numerator.
-        den                    - Rational's denominator.
         +                      - Sum operation.
         -                      - Subtraction operation.
         *                      - Multiplication operation.
@@ -32,6 +33,7 @@ class Rational:
         <                      - Less than comparator.
         <=                     - Less than or equal to comparator.
                                - (and other comparators by extension.)
+        is_zero                - Checks if Rational is equal to 0.
         is_int                 - Checks if Rational is an integer.
         to_float               - Rational as a floating point number.
     -------------------------------------------------------
@@ -170,7 +172,7 @@ class Rational:
         -------------------------------------------------------
         """
         try:
-            assert not other == 0, "cannot divide by 0."
+            assert not other.is_zero(), "cannot divide by 0."
             new_num = (self._num * other._den)
             new_den = (self._den * other._num) 
             return Rational(new_num, new_den)
@@ -229,17 +231,17 @@ class Rational:
         """
         return (self < other or self == other)
     
-#     def is_zero(self):
-#         """
-#         -------------------------------------------------------
-#         Is self equal to 0?
-#         -------------------------------------------------------
-#         Postconditions:
-#            returns - True if the fraction corresponding to self is 0,
-#                      False otherwise.
-#         -------------------------------------------------------
-#         """
-#         return (self._num == 0)
+    def is_zero(self):
+        """
+        -------------------------------------------------------
+        Is self equal to 0?
+        -------------------------------------------------------
+        Postconditions:
+           returns - True if the fraction corresponding to self is 0,
+                     False otherwise.
+        -------------------------------------------------------
+        """
+        return (self._num == 0)
     
     def is_int(self):
         """
