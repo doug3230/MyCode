@@ -19,12 +19,11 @@ class Rational:
     -denominator (the bottom of the fraction)
     Both of these are integers with the denominator not being 0.
     -------------------------------------------------------
-    Accessors:
-        num                    - Rational's numerator.
-        den                    - Rational's denominator.
     Operations:
         Rational(num, den = 1) - Initializes Rational.
         str                    - Converts Rational to string form.
+        num                    - Rational's numerator.
+        den                    - Rational's denominator.
         +                      - Sum operation.
         -                      - Subtraction operation.
         *                      - Multiplication operation.
@@ -261,7 +260,7 @@ class Rational:
         self as a floating point number.
         -------------------------------------------------------
         Postconditions:
-           returns - self's numerator divided by its denominator.
+           returns - self's numerator divided by its denominator (float)
         -------------------------------------------------------
         """ 
         return (self._num / self._den)
