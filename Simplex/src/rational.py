@@ -13,25 +13,36 @@ import rational_functions
 class Rational:
     """
     -------------------------------------------------------
-    This class models fractions used in math.
+    The Rational class models fractions used in math.
     It has two attributes:
     -numerator (the top of the fraction)
     -denominator (the bottom of the fraction)
     Both of these are integers with the denominator not being 0.
     -------------------------------------------------------
-    public methods:
-        Rational(num, den = 1) - Initializes Rational.
-        str                    - Converts Rational to string form.
+    Accessors:
         num                    - Rational's numerator.
         den                    - Rational's denominator.
-        
+    Operations:
+        Rational(num, den = 1) - Initializes Rational.
+        str                    - Converts Rational to string form.
+        +                      - Sum operation.
+        -                      - Subtraction operation.
+        *                      - Multiplication operation.
+        /                      - Division operation.
+        ==                     - Test for equality.
+        <                      - Less than comparator.
+        <=                     - Less than or equal to comparator.
+                               - (and other comparators by extension.)
+        is_zero                - Checks if Rational is equal to 0.
+        is_int                 - Checks if Rational is an integer.
+        to_float               - Rational as a floating point number.
     -------------------------------------------------------
     """
     
     def __init__(self, num, den=1):
         """
         -------------------------------------------------------
-        Initializes Rational.
+        Initializes self.
         -------------------------------------------------------
         Preconditions:
            num - the passed in numerator (int)
@@ -40,9 +51,12 @@ class Rational:
         Postconditions:
            Constructs an instance of the Rational class. 
            
-           The passed in numerator and denominator are modified
-           using the normalize() function to ensure consistency
-           and make Rationals easier to work with.
+        Note: to make working with Rationals easier, the stored
+        numerator and denominator have no factors in common.
+        Thus Rational(2,4) has the same numerator and denominator
+        as  Rational(1,2). Also, negative Rationals have their 
+        numerators as negative and the 0 Rational has a denominator
+        of 1.
         -------------------------------------------------------
         """
         assert num == int(num), "numerator must be an integer"
@@ -58,10 +72,10 @@ class Rational:
     def __str__(self):
         """
         -------------------------------------------------------
-        Converts Rational to string form.
+        Converts self to string form.
         -------------------------------------------------------
         Postconditions:
-           returns - If Rational is an integer, the string form of that integer.
+           returns - If self is an integer, the string form of that integer.
                      Otherwise returns a string of form "'num' / 'den'" (string)
         -------------------------------------------------------
         """
@@ -73,7 +87,7 @@ class Rational:
     def num(self):
         """
         -------------------------------------------------------
-        Rational's numerator.
+        self's numerator.
         -------------------------------------------------------
         Postconditions:
            returns - the top number of the fraction (int)
@@ -84,7 +98,7 @@ class Rational:
     def den(self):
         """
         -------------------------------------------------------
-        Rational's denominator.
+        self's denominator.
         -------------------------------------------------------
         Postconditions:
            returns - the bottom number of the fraction (int)
@@ -95,13 +109,12 @@ class Rational:
     def __add__(self, other):
         """
         -------------------------------------------------------
-        [method description]
+        The sum of self and other.
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           other - the right operand of the sum (Rational or float)
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - the value resulting from the sum (Rational)
         -------------------------------------------------------
         """
         try:
@@ -114,13 +127,12 @@ class Rational:
     def __sub__(self, other):
         """
         -------------------------------------------------------
-        [method description]
+        The subtraction from self of other.
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           other - the right operand of the subtraction (Rational or float)
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - the value resulting from the subtraction (Rational)
         -------------------------------------------------------
         """
         try:
@@ -133,13 +145,12 @@ class Rational:
     def __mul__(self, other):
         """
         -------------------------------------------------------
-           [method description]
+        The product of self and other.
         -------------------------------------------------------
         Preconditions:
-            [parameter name - parameter description (parameter type and constraints)]
+            other - the right operand of the multiplication (Rational or float)
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - the value resulting from the multiplication (Rational)
         -------------------------------------------------------
         """
         try:
@@ -152,13 +163,12 @@ class Rational:
     def __truediv__(self, other):
         """
         -------------------------------------------------------
-        [method description]
+        The division from self of other.
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           other - the right operand of the division (Rational != 0 or float != 0)
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - the value resulting from the division (Rational) 
         -------------------------------------------------------
         """
         try:
@@ -172,13 +182,13 @@ class Rational:
     def __eq__(self, other):
         """
         -------------------------------------------------------
-        [method description]
+        Is self equal to other?
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           other - the right operand of the '==' test for equality (Rational or float)
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - True if self and other have the same numerator and denominator,
+                     False otherwise.
         -------------------------------------------------------
         """
         try: 
@@ -191,13 +201,13 @@ class Rational:
     def __lt__(self, other):
         """
         -------------------------------------------------------
-        [method description]
+        Is self less than other?
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           other - the right operand of the '<'comparison (Rational or float)
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - True if the fraction corresponding to self is less than the
+                     fraction corresponding to other, False otherwise.
         -------------------------------------------------------
         """
         try:
@@ -210,27 +220,25 @@ class Rational:
     def __le__(self, other):
         """
         -------------------------------------------------------
-        [method description]
+        Is self less than or equal to other?
         -------------------------------------------------------
         Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
+           other - the right operand of the '<=' comparison (Rational or float)
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - True if the fraction corresponding to self is less than
+                     or equal to the fraction corresponding to other, False otherwise.
         -------------------------------------------------------
-        """ 
+        """
         return (self < other or self == other)
     
     def is_zero(self):
         """
         -------------------------------------------------------
-        [method description]
+        Is self equal to 0?
         -------------------------------------------------------
-        Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - True if the fraction corresponding to self is 0,
+                     False otherwise.
         -------------------------------------------------------
         """
         return (self._num == 0)
@@ -238,13 +246,11 @@ class Rational:
     def is_int(self):
         """
         -------------------------------------------------------
-        [method description]
+        Is self an integer?
         -------------------------------------------------------
-        Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - True if the fraction corresponding to self is an integer,
+                     False otherwise.
         -------------------------------------------------------
         """ 
         return (self._den == 1)  
@@ -252,13 +258,10 @@ class Rational:
     def to_float(self):
         """
         -------------------------------------------------------
-        [method description]
+        self as a floating point number.
         -------------------------------------------------------
-        Preconditions:
-           [parameter name - parameter description (parameter type and constraints)]
         Postconditions:
-           [returns: or prints:]
-           [return value name - return value description (return value type)] 
+           returns - self's numerator divided by its denominator.
         -------------------------------------------------------
         """ 
         return (self._num / self._den)
