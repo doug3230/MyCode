@@ -123,7 +123,7 @@ class Rational:
             new_den = (self._den * other._den)
             return Rational(new_num, new_den)
         except AttributeError:
-            return (self +rational_functions.parse_number(other))
+            return (self + rational_functions.parse_number(other))
         
     def __sub__(self, other):
         """
@@ -141,7 +141,7 @@ class Rational:
             new_den = (self._den * other._den)
             return Rational(new_num, new_den)
         except AttributeError:
-            return (self -rational_functions.parse_number(other)) 
+            return (self - rational_functions.parse_number(other)) 
         
     def __mul__(self, other):
         """
