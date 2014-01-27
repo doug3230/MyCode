@@ -19,7 +19,7 @@ class Rational:
     Attributes:
         num (the top of the fraction)
         den (the bottom of the fraction)
-    Both of these are integers with the denominator not being 0.
+    Both of these are integers with the denominator not equal to 0.
     -------------------------------------------------------
     Operations:
         Rational(num, den = 1) - Initializes Rational.
@@ -236,7 +236,12 @@ class Rational:
                      or equal to the fraction corresponding to other, False otherwise.
         -------------------------------------------------------
         """
-        return (self < other or self == other)
+        try:
+            lhs = (self._num * other._den)
+            rhs = (other._num * self._den)
+            return (lhs <= rhs)
+        except AttributeError:
+            return (self <= Rational.parse_number(other))
     
     def is_negative(self):
         """
@@ -323,7 +328,7 @@ class Rational:
         comps = string_form.split(".")
         
         int_comp = int(comps[0])
-        if (len(comps) == 0):
+        if (len(comps) == 1):
             return Rational(int_comp)
         else:
             dec_string = (comps[1])
@@ -352,9 +357,9 @@ class Rational:
         comps = str_value.split("/")
         assert len(comps) <= 2, "Cannot parse {0} as Rational".format(str_value) 
         
-        comps[0] = comps[0].strip()
+        num_string = comps[0].strip()
         if (len(comps) == 1):
-            return Rational(int(comps[0]))
+            return Rational(int(num_string))
         else:
-            comps[1] = comps[1].strip()
-            return Rational(int(comps[0]), int(comps[1]))
+            den_string = comps[1].strip()
+            return Rational(int(num_string), int(den_string))
