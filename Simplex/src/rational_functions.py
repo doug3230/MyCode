@@ -8,10 +8,6 @@ Email:   doug3230@mylaurier.ca
 Version: 2014-01-21
 -------------------------------------------------------
 """
-import rational
-from math import pow
-
-# [constants]
 
 def gcd(a, b):
     """
@@ -54,71 +50,4 @@ def normalize(num, den):
         num, den = -num, -den
     if (num == 0):
         den = 1 
-    return num, den
-    
-def parse_float(value):
-    """
-    -------------------------------------------------------
-    [function description]
-    -------------------------------------------------------
-    Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
-    Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
-    -------------------------------------------------------
-    """
-    string_form = str(value)
-    comps = string_form.split(".")
-    
-    int_comp = int(comps[0])
-    if (len(comps) == 0):
-        return rational.Rational(int_comp)
-    else:
-        dec_string = (comps[1])
-        tens = len(dec_string)
-        dec_comp = int(dec_string)
-    
-        den = (pow(10, tens))
-        num = (int_comp * den) + dec_comp
-        return rational.Rational(num, den)
-
-def parse_string(str_value):
-    """
-    -------------------------------------------------------
-    [function description]
-    -------------------------------------------------------
-    Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
-    Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
-    -------------------------------------------------------
-    """
-    comps = str_value.split("/")
-    assert len(comps) <= 2, "Cannot parse {0} as Rational".format(str_value) 
-    
-    comps[0] = comps[0].strip()
-    if (len(comps) == 1):
-        return rational.Rational(int(comps[0]))
-    else:
-        comps[1] = comps[1].strip()
-        return rational.Rational(int(comps[0]), int(comps[1]))
-
-def parse_number(value):
-    """
-    -------------------------------------------------------
-    [function description]
-    -------------------------------------------------------
-    Preconditions:
-       [parameter name - parameter description (parameter type and constraints)]
-    Postconditions:
-       [returns: or prints:]
-       [return value name - return value description (return value type)] 
-    -------------------------------------------------------
-    """
-    if value == int(value):
-        return rational.Rational(value)
-    else:
-        return parse_float(value)
-    
+    return num, den    

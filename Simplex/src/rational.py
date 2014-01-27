@@ -9,6 +9,7 @@ Version: 2014-01-21
 -------------------------------------------------------
 """
 import rational_functions
+from math import pow
 
 class Rational:
     """
@@ -37,6 +38,10 @@ class Rational:
         is_positive            - Checks if Rational is greater than 0.
         is_int                 - Checks if Rational is an integer.
         to_float               - Rational as a floating point number.
+    
+    Static Operations:
+        parse_number           - Converts a number to a Rational.
+        parse_string           - Converts a string to a Rational.
     -------------------------------------------------------
     """
     
@@ -123,7 +128,7 @@ class Rational:
             new_den = (self._den * other._den)
             return Rational(new_num, new_den)
         except AttributeError:
-            return (self + rational_functions.parse_number(other))
+            return (self + Rational.parse_number(other))
         
     def __sub__(self, other):
         """
@@ -141,7 +146,7 @@ class Rational:
             new_den = (self._den * other._den)
             return Rational(new_num, new_den)
         except AttributeError:
-            return (self - rational_functions.parse_number(other)) 
+            return (self - Rational.parse_number(other)) 
         
     def __mul__(self, other):
         """
@@ -159,7 +164,7 @@ class Rational:
             new_den = (self._den * other._den)
             return Rational(new_num, new_den)
         except AttributeError:
-            return (self * rational_functions.parse_number(other)) 
+            return (self * Rational.parse_number(other)) 
     
     def __truediv__(self, other):
         """
@@ -178,7 +183,7 @@ class Rational:
             new_den = (self._den * other._num) 
             return Rational(new_num, new_den)
         except AttributeError:
-            return (self / rational_functions.parse_number(other)) 
+            return (self / Rational.parse_number(other)) 
     
     def __eq__(self, other):
         """
@@ -197,7 +202,7 @@ class Rational:
             same_den = (self._den == other._den)
             return same_num and same_den
         except AttributeError:
-            return (self == rational_functions.parse_number(other))
+            return (self == Rational.parse_number(other))
     
     def __lt__(self, other):
         """
@@ -216,7 +221,7 @@ class Rational:
             rhs = (other._num * self._den)
             return (lhs < rhs)
         except AttributeError:
-            return (self < rational_functions.parse_number(other))
+            return (self < Rational.parse_number(other))
         
     def __le__(self, other):
         """
@@ -299,4 +304,56 @@ class Rational:
         -------------------------------------------------------
         """ 
         return (self._num / self._den)
+    
+    @staticmethod
+    def parse_number(value):
+        """
+        -------------------------------------------------------
+        Converts a number to a Rational.
+        -------------------------------------------------------
+        Preconditions:
+           value - the number to convert (float)
+        Postconditions:
+           returns - a Rational object corresponding to the number's
+                     representation as a fraction (Rational)
+        -------------------------------------------------------
+        """
+        string_form = str(value)
+        comps = string_form.split(".")
         
+        int_comp = int(comps[0])
+        if (len(comps) == 0):
+            return Rational(int_comp)
+        else:
+            dec_string = (comps[1])
+            tens = len(dec_string)
+            dec_comp = int(dec_string)
+        
+            den = (pow(10, tens))
+            num = (int_comp * den) + dec_comp
+            return Rational(num, den)
+
+    @staticmethod
+    def parse_string(str_value):
+        """
+        -------------------------------------------------------
+        Converts a string to a Rational.
+        -------------------------------------------------------
+        Preconditions:
+           str_value - the string to convert (string of form 'a/b' or 'a / b',
+                                              the string could also just be of 
+                                              an integer like "2")
+        Postconditions:
+           returns - a Rational object corresponding to the number's
+                     representation as a fraction (Rational)
+        -------------------------------------------------------
+        """
+        comps = str_value.split("/")
+        assert len(comps) <= 2, "Cannot parse {0} as Rational".format(str_value) 
+        
+        comps[0] = comps[0].strip()
+        if (len(comps) == 1):
+            return Rational(int(comps[0]))
+        else:
+            comps[1] = comps[1].strip()
+            return Rational(int(comps[0]), int(comps[1]))
