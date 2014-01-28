@@ -4,7 +4,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-public class CardIconFactory {
+public class IconFactory {
 
 	// Constants
 	// ---------
@@ -15,7 +15,7 @@ public class CardIconFactory {
 
 	// Constructor
 	// -----------
-	protected CardIconFactory() {
+	protected IconFactory() {
 	}
 
 	// Static Methods
@@ -23,6 +23,10 @@ public class CardIconFactory {
 	public static ImageIcon createCardIcon(String deckFolder, Card card) {
 		String fileName = card.getRank() + "_" + card.getSuit() + ".png";
 		return new ImageIcon(fullPath(deckFolder, fileName));
+	}
+
+	public static ImageIcon createCardBackIcon(String deckFolder) {
+		return new ImageIcon(fullPath(deckFolder, CARD_BACK));
 	}
 
 	public static ImageIcon createBlankIcon(String deckFolder) {
@@ -33,10 +37,6 @@ public class CardIconFactory {
 		return new ImageIcon(fullPath(deckFolder, EMPTY_DECK));
 	}
 
-	public static ImageIcon createCardBackIcon(String deckFolder) {
-		return new ImageIcon(fullPath(deckFolder, CARD_BACK));
-	}
-
 	public static ImageIcon createResizedIcon(ImageIcon icon, int width,
 			int height) {
 		Image image = icon.getImage();
@@ -45,9 +45,7 @@ public class CardIconFactory {
 		return new ImageIcon(resizedImage);
 	}
 
-	// Helper Methods
-	// --------------
-	private static String fullPath(String deckFolder, String fileName) {
+	public static String fullPath(String deckFolder, String fileName) {
 		if (!deckFolder.endsWith("/"))
 			deckFolder += "/";
 		return (IMAGE_PATH + deckFolder + fileName);

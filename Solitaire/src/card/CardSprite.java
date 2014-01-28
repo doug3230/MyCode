@@ -1,24 +1,29 @@
 package card;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class CardSprite extends JLabel {
 
 	// Data Members
 	// ------------
 	private Card card;
 	private String deckFolder;
+	private ImageIcon cardFront;
+	private ImageIcon cardBack;
+	private boolean isShown;
 
 	// Constructor
 	// -----------
-	public CardSprite(Card card, String deckFolder, int width, int height) {
+	public CardSprite(Card card, String deckFolder, boolean isShown) {
 		super();
 		this.card = card;
 		this.deckFolder = deckFolder;
-		setIcon(CardIconFactory.createCardIcon(deckFolder, card));
-		setSize(width, height);
+		this.cardFront = IconFactory.createCardIcon(deckFolder, card);
+		this.cardBack = IconFactory.createCardBackIcon(deckFolder);
+		this.isShown = isShown;
+		updateDisplay();
 	}
 
 	// Methods
@@ -31,28 +36,66 @@ public class CardSprite extends JLabel {
 		return deckFolder;
 	}
 
+	public boolean isShown() {
+		return isShown;
+	}
+
 	public void setCard(Card card) {
-		setIcon(CardIconFactory.createCardIcon(deckFolder, card));
-		setSize(getWidth(), getHeight());
+		this.card = card;
+		updateFrontIcon();
+		updateDisplay();
 	}
 
 	public void setDeckFolder(String deckFolder) {
 		this.deckFolder = deckFolder;
-		setIcon(CardIconFactory.createCardIcon(deckFolder, card));
-		setSize(getWidth(), getHeight());
+		updateFrontIcon();
+		updateBackIcon();
+		updateDisplay();
 	}
 
-	public void setSize(int width, int height) {
-		super.setSize(width, height);
-		ImageIcon oldIcon = (ImageIcon) this.getIcon();
-		this.setIcon(CardIconFactory.createResizedIcon(oldIcon, width, height));
+	public void show() {
+		this.isShown = true;
+		this.setIcon(cardFront);
 	}
 
-	public void setWidth(int width) {
-		setSize(width, getHeight());
+	public void hide() {
+		this.isShown = false;
+		this.setIcon(cardBack);
 	}
 
-	public void setHeight(int height) {
-		setSize(getWidth(), height);
+	public void flip() {
+		if (isShown)
+			hide();
+		else
+			show();
+	}
+
+	public void updateIconSize() {
+		this.cardFront = IconFactory.createResizedIcon(cardFront, getWidth(), getHeight());
+		this.cardBack = IconFactory.createResizedIcon(cardBack, getWidth(), getHeight());
+		updateDisplay();
+	}
+
+	// Private Methods
+	// ---------------
+	private void updateFrontIcon() {
+		int width = cardFront.getIconWidth();
+		int height = cardFront.getIconHeight();
+		ImageIcon newFront = IconFactory.createCardIcon(deckFolder, card);
+		this.cardFront = IconFactory.createResizedIcon(newFront, width, height);
+	}
+
+	private void updateBackIcon() {
+		int width = cardBack.getIconWidth();
+		int height = cardBack.getIconHeight();
+		ImageIcon newBack = IconFactory.createCardBackIcon(deckFolder);
+		this.cardBack = IconFactory.createResizedIcon(newBack, width, height);
+	}
+	
+	private void updateDisplay() {
+		if (isShown)
+			setIcon(cardFront);
+		else
+			setIcon(cardBack);
 	}
 }
