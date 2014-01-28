@@ -1,6 +1,9 @@
-package card;
+package testing;
 
 import javax.swing.*;
+
+import card.Card;
+import card.CardSprite;
 
 public class Test {
 
@@ -11,7 +14,7 @@ public class Test {
 		CardSprite aceSprite = new CardSprite(ace, "standard_deck", true);
 		aceSprite.setSize(200,160);
 		aceSprite.updateIconSize();
-		aceSprite.setSize(1,1);
+		aceSprite.setSize(100,100);
 		aceSprite.updateIconSize();
 		
 		window.setSize(400,400);
