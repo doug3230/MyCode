@@ -23,7 +23,7 @@ public class CardSprite extends JLabel {
 		this.cardFront = IconFactory.createCardIcon(deckFolder, card);
 		this.cardBack = IconFactory.createCardBackIcon(deckFolder);
 		this.isShown = isShown;
-		updateDisplay();
+		updateShownIcon();
 	}
 
 	// Methods
@@ -43,14 +43,14 @@ public class CardSprite extends JLabel {
 	public void setCard(Card card) {
 		this.card = card;
 		updateFrontIcon();
-		updateDisplay();
+		updateShownIcon();
 	}
 
 	public void setDeckFolder(String deckFolder) {
 		this.deckFolder = deckFolder;
 		updateFrontIcon();
 		updateBackIcon();
-		updateDisplay();
+		updateShownIcon();
 	}
 
 	public void show() {
@@ -73,7 +73,13 @@ public class CardSprite extends JLabel {
 	public void updateIconSize() {
 		this.cardFront = IconFactory.createResizedIcon(cardFront, getWidth(), getHeight());
 		this.cardBack = IconFactory.createResizedIcon(cardBack, getWidth(), getHeight());
-		updateDisplay();
+		updateShownIcon();
+	}
+	
+	public void updateDisplay() {
+		updateFrontIcon();
+		updateBackIcon();
+		updateIconSize();
 	}
 
 	// Private Methods
@@ -92,7 +98,7 @@ public class CardSprite extends JLabel {
 		this.cardBack = IconFactory.createResizedIcon(newBack, width, height);
 	}
 	
-	private void updateDisplay() {
+	private void updateShownIcon() {
 		if (isShown)
 			setIcon(cardFront);
 		else
