@@ -153,7 +153,7 @@ public class Card {
 	}
 
 	/** Is Card of the spades suit? */
-	public boolean isSpades() {
+	public boolean isSpade() {
 		return (suit.equals(SPADES));
 	}
 	
