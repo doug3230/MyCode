@@ -20,9 +20,10 @@ public class CardSprite extends JLabel {
 		super();
 		this.card = card;
 		this.deckFolder = deckFolder;
+		this.isShown = isShown;
+		
 		this.cardFront = IconFactory.createCardIcon(deckFolder, card);
 		this.cardBack = IconFactory.createCardBackIcon(deckFolder);
-		this.isShown = isShown;
 		updateShownIcon();
 	}
 
@@ -77,8 +78,8 @@ public class CardSprite extends JLabel {
 	}
 	
 	public void updateDisplay() {
-		updateFrontIcon();
-		updateBackIcon();
+		this.cardFront = IconFactory.createCardIcon(deckFolder, card);
+		this.cardBack = IconFactory.createCardBackIcon(deckFolder);
 		updateIconSize();
 	}
 

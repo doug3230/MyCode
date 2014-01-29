@@ -16,8 +16,8 @@ public class Test {
 		Card ace = new Card(1,"spades");
 		CardSprite aceSprite = new CardSprite(ace, "standard_deck", true);
 		
-		//aceSprite.setSize(100,100);
-		//aceSprite.updateIconSize();
+		aceSprite.setSize(100,100);
+		aceSprite.updateIconSize();
 		
 		window.setSize(300,400);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,6 +26,6 @@ public class Test {
 		contentPane.setLayout(new BorderLayout());
 		contentPane.add(aceSprite, BorderLayout.CENTER);
 		window.setVisible(true);
-		aceSprite.updateIconSize();
+		aceSprite.updateDisplay();
 	}
 }
