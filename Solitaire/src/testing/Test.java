@@ -1,5 +1,8 @@
 package testing;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+
 import javax.swing.*;
 
 import card.Card;
@@ -12,15 +15,17 @@ public class Test {
 		
 		Card ace = new Card(1,"spades");
 		CardSprite aceSprite = new CardSprite(ace, "standard_deck", true);
-		aceSprite.setSize(200,160);
-		aceSprite.updateIconSize();
-		aceSprite.setSize(100,100);
-		aceSprite.updateIconSize();
 		
-		window.setSize(400,400);
+		//aceSprite.setSize(100,100);
+		//aceSprite.updateIconSize();
+		
+		window.setSize(300,400);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.add(aceSprite);
+		
+		Container contentPane = window.getContentPane();
+		contentPane.setLayout(new BorderLayout());
+		contentPane.add(aceSprite, BorderLayout.CENTER);
 		window.setVisible(true);
+		aceSprite.updateIconSize();
 	}
-
 }
