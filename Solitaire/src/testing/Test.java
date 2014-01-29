@@ -26,6 +26,10 @@ public class Test {
 		contentPane.setLayout(new BorderLayout());
 		contentPane.add(aceSprite, BorderLayout.CENTER);
 		window.setVisible(true);
+		
+		Card two = aceSprite.getCard();
+		two.setRank(2);
+		two.setSuit("hearts");
 		aceSprite.updateDisplay();
 	}
 }

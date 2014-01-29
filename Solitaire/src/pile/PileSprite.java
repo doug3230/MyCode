@@ -1,12 +1,11 @@
 package pile;
 
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 import card.CardSprite;
 
+@SuppressWarnings("serial")
 public class PileSprite extends JLabel {
 	
 	//Data Members
