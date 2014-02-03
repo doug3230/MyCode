@@ -22,8 +22,8 @@ public class CardSprite extends JLabel {
 		this.deckFolder = deckFolder;
 		this.isShown = isShown;
 		
-		this.cardFront = IconFactory.createCardIcon(deckFolder, card);
-		this.cardBack = IconFactory.createCardBackIcon(deckFolder);
+		this.cardFront = SolitaireIconFactory.createCardIcon(deckFolder, card);
+		this.cardBack = SolitaireIconFactory.createCardBackIcon(deckFolder);
 		updateShownIcon();
 	}
 
@@ -72,14 +72,14 @@ public class CardSprite extends JLabel {
 	}
 
 	public void updateIconSize() {
-		this.cardFront = IconFactory.createResizedIcon(cardFront, getWidth(), getHeight());
-		this.cardBack = IconFactory.createResizedIcon(cardBack, getWidth(), getHeight());
+		this.cardFront = SolitaireIconFactory.createResizedIcon(cardFront, getWidth(), getHeight());
+		this.cardBack = SolitaireIconFactory.createResizedIcon(cardBack, getWidth(), getHeight());
 		updateShownIcon();
 	}
 	
 	public void updateDisplay() {
-		this.cardFront = IconFactory.createCardIcon(deckFolder, card);
-		this.cardBack = IconFactory.createCardBackIcon(deckFolder);
+		this.cardFront = SolitaireIconFactory.createCardIcon(deckFolder, card);
+		this.cardBack = SolitaireIconFactory.createCardBackIcon(deckFolder);
 		updateIconSize();
 	}
 
@@ -88,15 +88,15 @@ public class CardSprite extends JLabel {
 	private void updateFrontIcon() {
 		int width = cardFront.getIconWidth();
 		int height = cardFront.getIconHeight();
-		ImageIcon newFront = IconFactory.createCardIcon(deckFolder, card);
-		this.cardFront = IconFactory.createResizedIcon(newFront, width, height);
+		ImageIcon newFront = SolitaireIconFactory.createCardIcon(deckFolder, card);
+		this.cardFront = SolitaireIconFactory.createResizedIcon(newFront, width, height);
 	}
 
 	private void updateBackIcon() {
 		int width = cardBack.getIconWidth();
 		int height = cardBack.getIconHeight();
-		ImageIcon newBack = IconFactory.createCardBackIcon(deckFolder);
-		this.cardBack = IconFactory.createResizedIcon(newBack, width, height);
+		ImageIcon newBack = SolitaireIconFactory.createCardBackIcon(deckFolder);
+		this.cardBack = SolitaireIconFactory.createResizedIcon(newBack, width, height);
 	}
 	
 	private void updateShownIcon() {
