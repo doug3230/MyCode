@@ -10,21 +10,27 @@ public class CardSprite extends JLabel {
 	// ------------
 	private Card card;
 	private String deckFolder;
+	private CardIconFactory factory;
 	private ImageIcon cardFront;
 	private ImageIcon cardBack;
 	private boolean isShown;
 
 	// Constructor
 	// -----------
-	public CardSprite(Card card, String deckFolder, boolean isShown) {
+	public CardSprite(Card card, String deckFolder, CardIconFactory factory, boolean isShown) {
 		super();
 		this.card = card;
 		this.deckFolder = deckFolder;
+		this.factory = factory;
 		this.isShown = isShown;
 		
-		this.cardFront = SolitaireIconFactory.createCardIcon(deckFolder, card);
-		this.cardBack = SolitaireIconFactory.createCardBackIcon(deckFolder);
+		this.cardFront = factory.createCardIcon(deckFolder, card);
+		this.cardBack = factory.createCardBackIcon(deckFolder);
 		updateShownIcon();
+	}
+	
+	public CardSprite(Card card, String deckFolder, CardIconFactory factory) {
+		this(card, deckFolder, factory, true);
 	}
 
 	// Methods
@@ -35,6 +41,10 @@ public class CardSprite extends JLabel {
 
 	public String getDeckFolder() {
 		return deckFolder;
+	}
+	
+	public CardIconFactory getCardIconFactory() {
+		return factory;
 	}
 
 	public boolean isShown() {
@@ -54,6 +64,16 @@ public class CardSprite extends JLabel {
 		updateShownIcon();
 	}
 
+	public void setCardIconFactory(CardIconFactory factory) {
+		this.factory = factory;
+		updateDisplay();
+	}
+	
+	public void setIsShown(boolean isShown) {
+		this.isShown = isShown;
+		updateShownIcon();
+	}
+	
 	public void show() {
 		this.isShown = true;
 		this.setIcon(cardFront);
@@ -72,14 +92,14 @@ public class CardSprite extends JLabel {
 	}
 
 	public void updateIconSize() {
-		this.cardFront = SolitaireIconFactory.createResizedIcon(cardFront, getWidth(), getHeight());
-		this.cardBack = SolitaireIconFactory.createResizedIcon(cardBack, getWidth(), getHeight());
+		this.cardFront = factory.createResizedIcon(cardFront, getWidth(), getHeight());
+		this.cardBack = factory.createResizedIcon(cardBack, getWidth(), getHeight());
 		updateShownIcon();
 	}
 	
 	public void updateDisplay() {
-		this.cardFront = SolitaireIconFactory.createCardIcon(deckFolder, card);
-		this.cardBack = SolitaireIconFactory.createCardBackIcon(deckFolder);
+		this.cardFront = factory.createCardIcon(deckFolder, card);
+		this.cardBack = factory.createCardBackIcon(deckFolder);
 		updateIconSize();
 	}
 
@@ -88,15 +108,15 @@ public class CardSprite extends JLabel {
 	private void updateFrontIcon() {
 		int width = cardFront.getIconWidth();
 		int height = cardFront.getIconHeight();
-		ImageIcon newFront = SolitaireIconFactory.createCardIcon(deckFolder, card);
-		this.cardFront = SolitaireIconFactory.createResizedIcon(newFront, width, height);
+		ImageIcon newFront = factory.createCardIcon(deckFolder, card);
+		this.cardFront = factory.createResizedIcon(newFront, width, height);
 	}
 
 	private void updateBackIcon() {
 		int width = cardBack.getIconWidth();
 		int height = cardBack.getIconHeight();
-		ImageIcon newBack = SolitaireIconFactory.createCardBackIcon(deckFolder);
-		this.cardBack = SolitaireIconFactory.createResizedIcon(newBack, width, height);
+		ImageIcon newBack = factory.createCardBackIcon(deckFolder);
+		this.cardBack = factory.createResizedIcon(newBack, width, height);
 	}
 	
 	private void updateShownIcon() {
