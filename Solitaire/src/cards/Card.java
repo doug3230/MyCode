@@ -1,4 +1,4 @@
-package card;
+package cards;
 
 /**
  * This class models a playing card used in games like Solitaire and Black Jack.

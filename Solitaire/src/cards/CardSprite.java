@@ -1,4 +1,4 @@
-package card;
+package cards;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -62,11 +62,6 @@ public class CardSprite extends JLabel {
 		updateFrontIcon();
 		updateBackIcon();
 		updateShownIcon();
-	}
-
-	public void setCardIconFactory(CardIconFactory factory) {
-		this.factory = factory;
-		updateDisplay();
 	}
 	
 	public void setIsShown(boolean isShown) {

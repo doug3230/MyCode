@@ -1,4 +1,4 @@
-package pile;
+package piles;
 
 import java.util.ArrayList;
 import java.util.Iterator;
