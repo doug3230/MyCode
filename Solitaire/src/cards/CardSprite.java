@@ -9,7 +9,6 @@ public class CardSprite extends JLabel {
 	// Data Members
 	// ------------
 	private Card card;
-	private String deckFolder;
 	private CardIconFactory factory;
 	private ImageIcon cardFront;
 	private ImageIcon cardBack;
@@ -17,30 +16,25 @@ public class CardSprite extends JLabel {
 
 	// Constructor
 	// -----------
-	public CardSprite(Card card, String deckFolder, CardIconFactory factory, boolean isShown) {
+	public CardSprite(Card card, CardIconFactory factory, boolean isShown) {
 		super();
 		this.card = card;
-		this.deckFolder = deckFolder;
 		this.factory = factory;
 		this.isShown = isShown;
 		
-		this.cardFront = factory.createCardIcon(deckFolder, card);
-		this.cardBack = factory.createCardBackIcon(deckFolder);
+		this.cardFront = factory.createCardIcon(card);
+		this.cardBack = factory.createCardBackIcon();
 		updateShownIcon();
 	}
 	
-	public CardSprite(Card card, String deckFolder, CardIconFactory factory) {
-		this(card, deckFolder, factory, true);
+	public CardSprite(Card card, CardIconFactory factory) {
+		this(card, factory, true);
 	}
 
 	// Methods
 	// -------
 	public Card getCard() {
 		return card;
-	}
-
-	public String getDeckFolder() {
-		return deckFolder;
 	}
 	
 	public CardIconFactory getCardIconFactory() {
@@ -54,11 +48,10 @@ public class CardSprite extends JLabel {
 	public void setCard(Card card) {
 		this.card = card;
 		updateFrontIcon();
-		updateShownIcon();
 	}
-
-	public void setDeckFolder(String deckFolder) {
-		this.deckFolder = deckFolder;
+	
+	public void setCardIconFactory(CardIconFactory factory) {
+		this.factory = factory;
 		updateFrontIcon();
 		updateBackIcon();
 		updateShownIcon();
@@ -93,8 +86,8 @@ public class CardSprite extends JLabel {
 	}
 	
 	public void updateDisplay() {
-		this.cardFront = factory.createCardIcon(deckFolder, card);
-		this.cardBack = factory.createCardBackIcon(deckFolder);
+		this.cardFront = factory.createCardIcon(card);
+		this.cardBack = factory.createCardBackIcon();
 		updateIconSize();
 	}
 
@@ -103,14 +96,14 @@ public class CardSprite extends JLabel {
 	private void updateFrontIcon() {
 		int width = cardFront.getIconWidth();
 		int height = cardFront.getIconHeight();
-		ImageIcon newFront = factory.createCardIcon(deckFolder, card);
+		ImageIcon newFront = factory.createCardIcon(card);
 		this.cardFront = factory.createResizedIcon(newFront, width, height);
 	}
 
 	private void updateBackIcon() {
 		int width = cardBack.getIconWidth();
 		int height = cardBack.getIconHeight();
-		ImageIcon newBack = factory.createCardBackIcon(deckFolder);
+		ImageIcon newBack = factory.createCardBackIcon();
 		this.cardBack = factory.createResizedIcon(newBack, width, height);
 	}
 	

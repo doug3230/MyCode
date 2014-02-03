@@ -12,7 +12,7 @@ public class Test {
 	public static void main(String[] args) {
 		JFrame window = new JFrame("Test Window");
 		
-		CardIconFactory factory = new CardIconFactory();
+		CardIconFactory factory = new CardIconFactory("standard_deck");
 		Card ace = new Card(1,"spades");
 		CardSprite aceSprite = new CardSprite(ace, "standard_deck", factory);
 		

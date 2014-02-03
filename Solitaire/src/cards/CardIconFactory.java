@@ -29,32 +29,47 @@ import javax.swing.ImageIcon;
  */
 public class CardIconFactory {
 	
+	//Data Members
+	//------------
+	private String deckFolder;
+	
 	//Constructor
 	//-----------
-	/**Initializes CardIconFactory. CardIconFactory is ready to create ImageIcons upon construction.*/
-	public CardIconFactory() {
-		
+	/**Initializes CardIconFactory with the passed in folder as the location of the image files.*/
+	public CardIconFactory(String deckFolder) {
+		setFolder(deckFolder);
 	}
 
-	//Public Methods
-	//--------------
+	//Methods
+	//-------
+	public String getFolder() {
+		return deckFolder;
+	}
+	
+	public void setFolder(String folder) {
+		if (!folder.endsWith("/"))
+			this.deckFolder = folder + "/";
+		else
+			this.deckFolder = folder;
+	}
+	
 	/**Creates an ImageIcon for a card in a card game.*/
-	public ImageIcon createCardIcon(String deckFolder, Card card) {
+	public ImageIcon createCardIcon(Card card) {
 		return new ImageIcon(fullPath(deckFolder, cardFileName(card)));
 	}
 
 	/**Creates an ImageIcon for the back of a card in a card game.*/
-	public ImageIcon createCardBackIcon(String deckFolder) {
+	public ImageIcon createCardBackIcon() {
 		return new ImageIcon(fullPath(deckFolder, cardBackFileName()));
 	}
 
 	/**Creates an ImageIcon for a blank card in a card game.*/
-	public ImageIcon createBlankIcon(String deckFolder) {
+	public ImageIcon createBlankIcon() {
 		return new ImageIcon(fullPath(deckFolder, blankFileName()));
 	}
 
 	/**Creates an ImageIcon for an empty deck in a card game.*/
-	public ImageIcon createEmptyDeckIcon(String deckFolder) {
+	public ImageIcon createEmptyDeckIcon() {
 		return new ImageIcon(fullPath(deckFolder, emptyDeckFileName()));
 	}
 
@@ -96,8 +111,6 @@ public class CardIconFactory {
 	//Helper Methods
 	//--------------
 	private static String fullPath(String deckFolder, String fileName) {
-		if (!deckFolder.endsWith("/"))
-			deckFolder += "/";
 		return (pathToFolders() + deckFolder + fileName);
 	}
 }
