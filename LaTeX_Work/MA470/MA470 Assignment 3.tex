@@ -1,0 +1,178 @@
+\documentclass{article}[12pt,a4paper]
+\usepackage{a4wide}
+%\usepackage{fullpage}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{bbm}
+
+\title{MA470 Assignment 3}
+\author{Richard Douglas}
+\date{February 13,  2014} %defaults to \today
+
+\begin{document}
+  \maketitle
+  The final page of this submission consists of an appendix with derivations of general reusable results that 
+  are used throughout my solutions.\newline
+  \begin{enumerate}
+  \item[\textbf{Exercise 2.9}]
+  $$V(t, S) = e^{-r\tau}\widetilde{E}_{t,  S} \left[ (S(T) - K - X) \mathbbm{1}_{\{ S^(T) \ge K \}} \right]
+  = e^{-r\tau}(\widetilde{E}_{t, S} \left[ (S(T) - K)^{+}\right] - 
+  	\widetilde{E}_{t, S} \left[ X \cdot  \mathbbm{1}_{\{ S^(T) \ge K \}} \right])$$
+  $$= C(t, S; r, q) - e^{-r\tau}X\cdot \widetilde{P}_{t, S}(S(T) \ge K) $$
+  $$= e^{-q\tau}S\cdot N(d^*_+(S/K, \tau)) - e^{-r\tau}K\cdot N(d^*_-(S/K,\tau))  - e^{-r\tau}X\cdot N(d^*_-(S/K,\tau))$$
+  $$= e^{-q\tau}S\cdot N(d^*_+(S/K, \tau)) - e^{-r\tau}(K + X)\cdot N(d^*_-(S/K,\tau))$$
+  
+  Moreover, X is such that
+  $$V(t,S) = 0$$
+  
+  Therefore
+  $$X =  \frac{e^{(r - q)\tau} S\cdot N(d^*_+(S/K, \tau))}{ N(d^*_-(S/K,\tau))}  - K$$
+  
+  More explicitly
+  $$X =  \frac{e^{(r - q)\tau} S \cdot N( \frac{ln(S/K) + (r - q + \sigma^2/2)\tau}{\sigma\sqrt\tau})}
+  {N( \frac{ln(S/K) + (r - q - \sigma^2/2)\tau}{\sigma\sqrt\tau})} - K$$
+  
+  The fair value for X as the stock's volatility parameter becomes arbitrarily large is
+  $$\lim_{\sigma \rightarrow \infty}{X} = 
+  \lim_{\sigma \rightarrow \infty}{ \frac{e^{(r - q)\tau} S \cdot N( \frac{ln(S/K) + (r - q + \sigma^2/2)\tau}{\sigma\sqrt\tau})}
+  {N( \frac{ln(S/K) + (r - q - \sigma^2/2)\tau}{\sigma\sqrt\tau})} -  K} $$
+  $$= \lim_{\sigma \rightarrow \infty}{e^{(r - q)\tau} S \cdot \frac{ N(\sigma\sqrt\tau/2)}
+  {N(- \sigma\sqrt\tau/2)} - K}   
+  = \infty$$
+  Thus we see that the fair value for X also becomes arbitrarily large.
+  \pagebreak
+  
+  \item[\textbf{Exercise 2.17}]
+  (a)
+  $$dC_t = \mu_cC_tdt + \sigma_cC_td\widetilde{W}(t)$$
+  $$d\frac{1}{B(t)} = -re^{-rt}dt$$
+  $$d\bar{C}_t = d\frac{C_t}{B(t)} = C_td\frac{1}{B(t)} + \frac{1}{B(t)}dC_t + dC_td\frac{1}{B(t)}$$
+  $$= (\mu_c - r)e^{-rt}C_tdt + \sigma_cC_te^{-rt}d\widetilde{W}(t)$$
+  but in general for any portfolio in the (B, S) economy with nondividend paying stock,
+  $$d\bar{\Pi}_t = \Delta_t\sigma\bar{S}(t)d\widetilde{W}(t)$$
+  It follows that $\mu_c = r$ and $\sigma_c = \frac{\Delta_t\sigma  S(t)}{C_t}$
+  
+  More explicitly, 
+  $$\sigma_c = \frac{N(d_+(S(t)/K,\tau))\sigma S(t)}{S(t)N(d_+(S(t)/K,\tau)) - Ke^{-r\tau}N(d_-(S(t)/K,\tau))}$$ 
+  $$= \frac{\sigma}{1 - \frac{Ke^{-r\tau}N(d_-(S(t)/K,\tau))}{S(t)N(d_+(S(t)/K,\tau))}}$$\newline
+  
+  (b)
+  $$\lim_{K \searrow 0}{\sigma_c} = \frac{\sigma}{1 - 0} = \sigma$$
+  The reason why this is so is because a European call option where you pay \$$0$ for a stock at time T
+  can be replicated by a portfolio consisting of a share of stock bought at an earlier date 
+  (e.g. the present date.) Since a share of stock has volatility parameter $\sigma$ and the same payoff
+  as the option in all scenarios, the European call option with strike $K = 0$ must also have 
+  $\sigma$ as its volatility parameter.
+   
+  \pagebreak
+  \item[\textbf{Exercise 2.19}]
+  (a)
+   For all $t \le T_1$,
+   $$C(t, S; T_1, T) = e^{-r\tau} \widetilde{E}_{t, S}\left[ (S(T) - \alpha S(T_1))^+ \right]
+    = e^{-r\tau} \widetilde{E}_{t, S}\left[ \widetilde{E}_{T_1, S(T_1)}\left[ (S(T) - \alpha S(T_1))^+ \right] \right]$$
+    $$= e^{-r\tau} \widetilde{E}_{t, S}\left[ \widetilde{E}_{T_1, S(T_1)}\left[S(T_1) \cdot 
+        (\frac{S(T)}{S(T_1)} - \alpha)^+ \right] \right]
+        = e^{-r\tau} \widetilde{E}_{t, S}\left[ S(T_1) \cdot \widetilde{E}_{T_1, S(T_1)}\left[
+        (\frac{S(T)}{S(T_1)} - \alpha)^+ \right] \right]$$
+        \hfill (where $S(T_1)$ and $\frac{S(T)}{S(T_1)}$ are independent.) 
+        
+        Thus we have
+        $$C(t, S; T_1, T) = e^{-r\tau} \widetilde{E}_{t, S}\left[ S(T_1) \right] \cdot \widetilde{E}\left[
+        (\frac{S(T)}{S(T_1)} - \alpha)^+ \right]$$
+        $$= S \cdot e^{-r(T - T_1)}\widetilde{E}\left[(\frac{S(T)}{S(T_1)} - \alpha)^+ \right]$$
+        Note that
+        $$\frac{S(T)}{S(T_1)} \,{\buildrel d \over =}\, e^{(r - q - \sigma^2/2)(T - T_1) + 
+            \sigma(\widetilde{W}(T) - \widetilde{W}(T_1))} $$
+       Thus the term in the above expectation can be thought of as the payoff for a European call option 
+       with strike $K = \alpha$ purchased at time $0$ with maturity date $\tau_1 := T - T_1$ and initial
+       stock price $S(0) = 1$.
+       
+       Thus
+        $$C(t, S; T_1, T) = S \cdot (e^{-q\tau_1}N(d_+^*(1/\alpha, \tau_1)) -
+        \alpha e^{-r\tau_1} N(d_-^*(1/\alpha, \tau_1)))$$ 
+        
+        Note that for all $t \le T_1$,
+        $$\Delta(t, S) = \frac{\partial C}{\partial S} = e^{-q\tau_1}N(d_+^*(1/\alpha, \tau_1)) -
+        \alpha e^{-r\tau_1} N(d_-^*(1/\alpha, \tau_1))$$
+        Thus up until time $T_1$, the forward starting call can be hedged with a portfolio of 
+        $$e^{-q\tau_1}N(d_+^*(1/\alpha, \tau_1)) - \alpha e^{-r\tau_1} N(d_-^*(1/\alpha, \tau_1))$$
+        units of stock and no investment in the risk-free asset. This strategy is static. \newline
+   
+  (b)
+  $$\lim_{T_1 \rightarrow t}{C(t, S; T_1, T)} = 
+  \lim_{T_1 \rightarrow t}{ S \cdot (e^{-q\tau_1}N(d_+^*(1/\alpha, \tau_1)) - \alpha e^{-r\tau_1} N(d_-^*(1/\alpha, \tau_1)))}$$
+  $$= \lim_{\tau_1 \rightarrow \tau}{ S \cdot (e^{-q\tau_1}N(d_+^*(1/\alpha, \tau_1)) - \alpha e^{-r\tau_1} 
+  N(d_-^*(1/\alpha, \tau_1)))}$$
+  $$= Se^{-q\tau}N(d_+^*(1/\alpha, \tau)) - \alpha S e^{-r\tau} N(d_-^*(1/\alpha, \tau))$$
+ 
+  This is in fact the price of a European call option with strike $K = \alpha S$. \newline
+   $$\lim_{T_1 \rightarrow T}{C(t, S; T_1, T)} = 
+   \lim_{T_1 \rightarrow T}{ S \cdot (e^{-q\tau_1}N(d_+^*(1/\alpha, \tau_1)) - \alpha e^{-r\tau_1} N(d_-^*(1/\alpha, \tau_1)))}$$
+   $$= \lim_{\tau_1 \rightarrow 0}{ S \cdot (e^{-q\tau_1}N(d_+^*(1/\alpha, \tau_1)) - \alpha e^{-r\tau_1} N(d_-^*(1/\alpha, \tau_1)))}$$
+   $$= \lim_{\tau_1 \rightarrow 0}{ S \cdot (N(d_+^*(1/\alpha, \tau_1)) - \alpha N(d_-^*(1/\alpha, \tau_1)))}$$
+   $$= \lim_{\tau_1 \rightarrow 0}{ S \cdot (N(-ln(\alpha)/\tau_1) - \alpha N(-ln(\alpha)/\tau_1))} = S\cdot(1 - \alpha)^+$$
+   (Some unnecessary terms ommitted on the last line. The key point is that the Normal CDF values go to $0$ if
+    $\alpha >= 1 \mbox{ } (\Rightarrow -ln(\alpha) < 0)$ and go to $1$ if $\alpha < 1 \mbox{ } (\Rightarrow -ln(\alpha) > 0)$.)
+   
+  \pagebreak
+  \item[\textbf{Exercise 2.20}]
+  (a)
+  For all $t \le T_0$
+  $$V = V(t, S) = e^{-r\tau}\widetilde{E}_{t,S}\left[ \mbox{min}\{S(T_0),S(T)\} \right]$$ 
+  $$= e^{-r\tau}\widetilde{E}_{t,S}\left[ S(T) - (S(T) - S(T_0)) \mathbbm{1}_{\{ S^(T) \ge S(T_0) \}} \right]$$
+  $$= e^{-r\tau}\widetilde{E}_{t,S}\left[S(T)\right] - e^{-r(T_0 - t)}
+  \widetilde{E}_{t,S}\left[e^{-r(T - T_0)}\widetilde{E}_{T_0,S(T_0)}
+  \left[(S(T) - S(T_0)) \mathbbm{1}_{\{ S^(T) \ge S(T_0) \}}\right]\right]$$
+  $$= S - e^{-r(T_0 - t)} \widetilde{E}_{t,S}\left[ C(T_0, S(T_0)) \right]$$
+  \hfill (where the European call option has strike price $K = S(T_0)$.) \newline
+  
+  The above can be simplified
+  $$V = S -  e^{-r(T_0 - t)} \widetilde{E}_{t,S}\left[ 
+      S(T_0) \cdot N(d_+(S(T_0)/S(T_0), T - T_0)) - e^{-r(T - T_0)}S(T_0)  \cdot N(d_-(S(T_0)/S(T_0), T - T_0)) \right]$$
+ $$= S -  e^{-r(T_0 - t)} \widetilde{E}_{t,S}\left[ S(T_0)(N(d_+) - e^{-r(T - T_0)}N(d_-)) \right]$$
+  \hfill (note that $d_+$ and $d_-$ are deterministic.)
+  $$= S - S\cdot (N(d_+) - e^{-r(T - T_0)}N(d_-))$$ 
+  $$= S\cdot(1 - N(d_+) + e^{-r(T - T_0)}N(d_-)) $$
+  $$= S \cdot (N(-d_+) + e^{-r(T - T_0)}N(d_-))$$ \newline
+  
+  (b) 
+  For all $t \le T_0$
+  $$\Delta(t, S) = \frac{\partial V}{\partial S} = N(-d_+) + e^{-r(T - T_0)}N(d_-)$$
+  That is, the position in the stock is constant. Moreover the value of the portfolio corresponding to the stock  is
+  $$S(t) \cdot \Delta(t, S(t)) = V(t, S(t))$$
+  so we see that investing in the risk-free asset is not necessary. 
+  Thus until $T_0$ the payoff can be replicated using a static portfolio with a position of
+  $$N(-d_+) + e^{-r(T - T_0)}N(d_-)$$
+  units of stock and $0$ units of the risk-free asset. \newline
+  
+  \textbf{Aside:} At time $T_0$ however, changes to the portfolio will occur. 
+  For example, a European call option with strike $S(T_0)$ might be written to another investor. 
+  This guarantees that at time $T$ the payoff will be the minimum of $S(T_0)$ and $S(T)$.
+  \end{enumerate}
+  
+  \pagebreak
+  \section*{Appendix}
+  \textbf{Generalized $d$ function:}
+  $$d_{\pm}^{*}(m,\tau) := \frac{ln(m) + (r - q \pm \sigma^2/2)\tau}{\sigma\sqrt\tau}$$
+  \newline \textbf{Call Without Dividend:} 
+  $$C(t, S) = S\cdot N(d_+(S/K,\tau)) - e^{-r\tau}K\cdot N(d_-(S/K, \tau))$$
+  \newline \textbf{Call With Dividend:} 
+  $$C(t, S ; r, q) = e^{-q\tau}S\cdot N(d^*_+(S/K, \tau)) - e^{-r\tau}K\cdot N(d^*_-(S/K,\tau))$$
+  \newline \textbf{Put-Call Parity}
+  $$C(t,S;r,q) - P(t,S;r,q) = e^{-q\tau}S - e^{-r\tau}K$$
+  \newline\textbf{Result 1:}
+  $$\widetilde{P}(\frac{S(T)}{S(t)} > \frac{K}{S}) = 
+  \widetilde{P}(\widetilde{Z} > \frac{-ln(S/K) - (r - q - \sigma^2/2)(T - t)}{\sigma\sqrt{T - t}}) = N(d^*_-(S/K,T - t))$$ \newline
+  \textbf{Result 2:}
+  $$\widetilde{P}(S(t) > K) = \widetilde{P}(\frac{S(t)}{S(0)} > \frac{K}{S(0)}) = N(d_-^*(S(0)/K,t))$$ \newline
+  \textbf{Result 3:}
+  $$\widetilde{E}_{t\mbox{,}S}\left[ S^{\alpha}(T) \right] = 
+   S(t)^\alpha e^{\alpha(r - q - \sigma^2/2)\tau} \widetilde{E}\left[ e^{\alpha \sigma \sqrt\tau \widetilde{Z}}\right] =
+    S(t)^\alpha e^{\alpha(r - q - \sigma^2(1  - \alpha)/2 )\tau}$$ 
+    \newline \textbf{Result 4:}
+    $$
+    E \left[ e^{aZ} \mathbbm{1}_{\{ Z > b \}} \right] = 
+    \int_b^{\infty} { e^{az} \frac{1}{\sqrt{2\pi}} e^{-z^2/2} dz} = 
+    e^{a^2/2}\int_{b}^{\infty}{\frac{1}{\sqrt{2\pi}}  e^{-(z - a)^2/2} dz} = 
+    e^{a^2/2} \cdot (1 - N(b - a)) = e^{a^2/2} \cdot N(a - b)$$
+\end{document}

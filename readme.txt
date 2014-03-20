@@ -1,5 +1,5 @@
-MyCode
---------
+Portfolio
+---------
 Author  : Richard Douglas
 Email   : doug3230@mylaurier.ca
 
