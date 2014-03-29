@@ -2,3 +2,6 @@ Throughout this phase, I have made use of the following resources:
 
 Subtitle Hack
 http://tex.stackexchange.com/questions/50182/subtitle-with-the-maketitle-page
+
+Hyperlinked Table of Contents Hack
+http://tex.stackexchange.com/questions/73862/how-can-i-make-a-clickable-table-of-contents

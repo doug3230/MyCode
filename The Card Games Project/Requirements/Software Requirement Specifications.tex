@@ -2,7 +2,8 @@
 \usepackage{fullpage}
 \usepackage{tikz}
 \usepackage{multicol}
-\usepackage{titling}
+\usepackage{titling} %for subtitle hack
+\usepackage{hyperref} %for hyperlinked toc hack
 
 %Hacks
 %-------
@@ -12,6 +13,15 @@
     \par\end{center}
     \begin{center}\large#1\end{center}
     \vskip0.5em}%
+}
+
+%hyperlinked table of contents hack
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
 }
 
 %Title
@@ -25,4 +35,24 @@
 %------------
 \begin{document}
   \maketitle
+  
+  \section*{Overview}
+  This document consists of a requirements analysis of The Card Games Project.
+  In it, the required functionality, desired features, and scope of the project are discussed.
+  
+  \tableofcontents
+  
+  \pagebreak
+  
+  \section{Section AAH!}
+  I am the text of Section AAH!
+  
+  \section{Section BLAH!}
+  I am the text of Section BLAH!
+  
+  \section*{Wha?}
+  I am not a section.
+  
+  \section{CAH!}
+  I am the text of Section CAH!
 \end{document}  
