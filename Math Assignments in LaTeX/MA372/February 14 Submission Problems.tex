@@ -1,0 +1,311 @@
+\documentclass{article}[12pt,a4paper]
+%\usepackage{a4wide}
+\usepackage{fullpage}
+\usepackage{tikz}
+
+\title{MA372 Submission Problems}
+\author{Richard Douglas}
+\date{February 14,  2014}
+
+\begin{document}
+  \maketitle
+  \begin{enumerate}
+  \item For an LP of the form maximize $z = cx$ subject to $Ax \le b$, $x \ge 0$, with $n$ decision variables
+  and $m$ constraints, prove the \textit{Complementary Slackness Theorem}: let $x$ be a feasible solution
+  to the LP, and let $y$ be a feasible solution to its dual. Then $x$ and $y$ are optimum solutions to their 
+  respective problems if and only if
+  $$x_j(\sum_{1 \le i \le m}{a_{ij}y_i - c_j}) = 0$$
+  for all $1 \le j \le m$, and
+  $$y_i(\sum_{1 \le j \le n}{a_{ij}x_j - b_i}) = 0$$ 
+  for all $1 \le i \le n$.
+  \newline
+  \item 
+  (a) In part (a) of the Submission Problem in the January 22 Study Guide, you saw that the change in resources
+  resulted in a tableau with an infeasible basic solution:
+  \begin{center}
+  \begin{tabular}{c | c | c c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $RHS$ \\ \hline
+           & $1$ & $0$ & $4$ & $0$ & $0$ & $2$ & $2$ & $72$ \\ \hline
+  $x_4$ & $0$ & $0$ & $2$ & $0$ & $1$ & $-3/2$ & $1$ & $4$ \\
+  $x_1$ & $0$ & $1$ & $-1/2$ & $0$ & $0$ & $7/4$ & $-5/2$ & $-5$ \\
+  $x_3$ & $0$ & $0$ & $1/2$ & $1$ & $0$ & $-1/4$ & $1/2$ & $3$
+  \end{tabular}
+  \end{center}
+   Use the Dual Simplex Algorithm to return to a tableau with a feasible solution, and find the new optimum solution. \newline
+  
+  (b) Apply the Dual Simplex Algorithm to solve the following Linear Program:
+  $$\mbox{Minimize } 6x_1 + x_2 + 2x_3$$
+  subject to
+  $$3x_1 + x_2 + x_3 \ge 2$$
+  $$x_1 - x_2 + x_3 \ge -1$$
+  $$x_1 + 2x_2 - x_3 \ge 1$$
+  $$x_1, x_2, x_3 \ge 0$$
+  \pagebreak
+  
+  \item
+  (a) Solve the following LP using the ``Big M'' method.
+  $$\mbox{Minimize } 40x_1 + 30x_2 + 10x_3$$
+  subject to
+  $$x_1 + x_2 + x_3 = 6$$
+  $$x_1 + 2x_2 + 4x_3 \le 12$$
+  $$x_1, x_2, x_3 \ge 0$$ \newline
+  (b) Use the ``Big M'' method to demonstrate that the following LP has no feasible solutions:
+  $$\mbox{Maximize } z = 5x_1 + 4x_2$$
+  subject to
+  $$3x_1 + 2x_2 \le 6$$
+  $$2x_1 - x_2 \ge 6$$
+  $$x_1, x_2 \ge 0$$ \newline
+  \end{enumerate}
+  \textbf{Note:} In my tableaux I put a $-1$ in the $z$ entry of the objective row whenever I am maximizing
+  $-z$. I do this so that I remember to multiply the objective value for $-z$ by $-1$ at the end of the algorithm.
+  I also denote artificial variables as $a_1$, $a_2$, $a_3$, etc.... This is to remind me that we don't want such
+  variables to be in the optimum basis. I will change notation if it would be preferred.
+  \pagebreak
+  
+  \begin{enumerate}
+  \item \textbf{Proof:} \newline
+  ``$\mathbf{\Leftarrow}$'' \newline
+  The sums can be rewritten as
+  $$\sum_{1 \le i \le m}{(x_ja_{ij}y_i - c_jx_j)} = 0$$
+  for all $1 \le j \le m$, and
+  $$\sum_{1 \le j \le n}{(x_ja_{ij}y_i - b_iy_i)} = 0$$ 
+  for all $1 \le i \le n$.
+  
+  It follows then that if we sum over all $j$ for the first sum equations and all $i$ for the second sum equations 
+  then the righthandside will still be $0$.
+  $$\sum_{1 \le j \le n}{\sum_{1 \le i \le m}{(x_ja_{ij}y_i - c_jx_j})} = 0$$
+  $$\sum_{1 \le i \le m}{\sum_{1 \le j \le n}{(x_ja_{ij}y_i - b_iy_i)}} = 0$$ 
+  Simplifying gives us
+  $$\sum_{1 \le j \le n}{\sum_{1 \le i \le m}{x_ja_{ij}y_i}} - \sum_{1 \le j \le n}{c_jx_j} = 0$$
+  $$\sum_{1 \le i \le m}{\sum_{1 \le j \le n}{x_ja_{ij}y_i - \sum_{1 \le i \le m}{b_iy_i}}} = 0$$ 
+  The order of summation in the double sum does not change its value. Thus
+  $$\sum_{1 \le j \le n}{c_jx_j} = \sum_{1 \le i \le m}{b_iy_i}$$
+  By the Fundamental Theorem of Optimization, $x$ and $y$ are solutions to their respective problems. \newline
+  
+  ``$\mathbf{\Rightarrow}$'' \newline
+  Since $x$ and $y$ are optimal, we can use the fact that
+  $$\sum_{1 \le j \le n}{c_jx_j} = \sum_{1 \le i \le m}{b_iy_i}$$
+  It follows that
+  $$ -\sum_{1 \le j \le n}{\sum_{1 \le i \le m}{x_ja_{ij}y_i}} + \sum_{1 \le j \le n}{c_jx_j} +
+  \sum_{1 \le i \le m}{\sum_{1 \le j \le n}{x_ja_{ij}y_i - \sum_{1 \le i \le m}{b_iy_i}}} = 0$$
+  Factoring gives us
+  $$\sum_{1 \le j \le n}{x_j(\sum_{1 \le i \le m}{c_j - y_ia_{ij}})} + 
+      \sum_{1 \le i \le m}{y_i(\sum_{1 \le j \le n}{a_{ij}x_j - b_i})} = 0$$
+  \pagebreak
+  
+  $x$ and $y$ are feasible in their respective problems. Therefore
+  $$Ax \le b \Rightarrow \sum_{1 \le j \le n}{a_{ij}x_j} \le b_j \mbox{ for all } j \Rightarrow
+   b_j - \sum_{1 \le j \le n}{a_{ij}x_j} \ge 0 \mbox{ for all } j \le 0$$ 
+  $$yA \ge c \Rightarrow \sum_{1 \le i \le m}{y_ia_{ij}} \ge c_i \mbox{ for all } i \Rightarrow
+   \sum_{1 \le i \le m}{y_ia_{ij}} - c_i \ge 0 \mbox{ for all } i$$   
+  Now in the previous equation
+  $$\sum_{1 \le j \le n}{x_j(\sum_{1 \le i \le m}{c_j - y_ia_{ij}})} + 
+      \sum_{1 \le i \le m}{y_i(\sum_{1 \le j \le n}{a_{ij}x_j - b_i})} = 0$$
+  $x_j$, $y_i$, $\sum_{1 \le i \le m}{(y_ia_{ij} - c_j)}$, and $\sum_{1 \le j \le n}{(a_{ij}x_j - b_i)}$ are all 
+  nonnegative. Therefore it must be the case that each of the individual summations holds.
+  
+  That is we must have
+  $$x_j(\sum_{1 \le i \le m}{c_j - a_{ij}y_i}) = x_j(\sum_{1 \le i \le m}{a_{ij}y_i - c_j}) = 0$$
+  for all $1 \le j \le m$, and
+  $$y_i(\sum_{1 \le j \le n}{a_{ij}x_j - b_i}) = 0$$ 
+  for all $1 \le i \le n$. \newline
+  
+  With ``$\mathbf{\Leftarrow}$' and  ``$\mathbf{\Rightarrow}$'' proven, the result follows.
+  
+  \pagebreak
+  
+  \item
+  (a) Starting with 
+   \begin{center}
+  \begin{tabular}{c | c | c c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $RHS$ \\ \hline
+           & $1$ & $0$ & $4$ & $0$ & $0$ & $2$ & $2$ & $72$ \\ \hline
+  $x_4$ & $0$ & $0$ & $2$ & $0$ & $1$ & $-3/2$ & $1$ & $4$ \\
+  $x_1$ & $0$ & $1$ & $-1/2$ & $0$ & $0$ & $7/4$ & $-5/2$ & $-5$ \\
+  $x_3$ & $0$ & $0$ & $1/2$ & $1$ & $0$ & $-1/4$ & $1/2$ & $3$
+  \end{tabular}
+  \end{center}
+  For the Dual Simplex Algorithm, we wish to pivot on row $2$ due to the negative entry in the $b$ column. 
+  The Dual Minimum Ratio Test says to pivot at column $6$ since $|\frac{2}{-5/2}| < |\frac{4}{-1/2}|$. \newline 
+  The resulting tableau is
+  \begin{center}
+  \begin{tabular}{c | c | c c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $RHS$ \\ \hline
+           & $1$ & $4/5$ & $18/5$ & $0$ & $0$ & $17/5$ & $0$ & $68$ \\ \hline
+  $x_4$ & $0$ & $2/5$ & $9/5$ & $0$ & $1$ & $-4/5$ & $0$ & $2$ \\
+  $x_6$ & $0$ & $-2/5$ & $1/5$ & $0$ & $0$ & $-7/10$ & $1$ & $2$ \\
+  $x_3$ & $0$ & $1/5$ & $2/5$ & $1$ & $0$ & $1/10$ & $0$ & $2$
+  \end{tabular}
+  \end{center}
+  Thus the new optimum solution is \{$x_1 = 0$, $x_2 = 0$, $x_3 = 2$\} with objective value $68$. \newline
+  
+  (b)
+  The linear program is first converted to the maximization problem
+   $$\mbox{Maximize } -6x_1 - x_2 - 2x_3$$
+  subject to
+  $$-3x_1 - x_2 - x_3 + x_4 = -2$$
+  $$-x_1 + x_2 - x_3 + x_5 = 1$$
+  $$-x_1 - 2x_2 + x_3 + x_6 = -1$$
+  $$x_1, x_2, x_3, x_4, x_5, x_6 \ge 0$$
+  where $x_4$, $x_5$, $x_6$ are slack variables. \newline
+  
+  The starting tableau is
+  \begin{center}
+  \begin{tabular}{c | c | c c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $RHS$ \\ \hline
+           & $-1$ & $6$ & $1$ & $2$ & $0$ & $0$ & $0$ & $0$ \\ \hline
+  $x_4$ & $0$ & $-3$ & $-1$ & $-1$ & $1$ & $0$ & $0$ & $-2$ \\
+  $x_5$ & $0$ & $-1$ & $1$ & $-1$ & $0$ & $1$ & $0$ & $1$ \\
+  $x_6$ & $0$ & $-1$ & $-2$ & $1$ & $0$ & $0$ & $1$ & $-1$
+  \end{tabular}
+  \end{center}
+  The basic solution is not feasible because of the negative entry in the final column of row 3.
+  If we pivot on row 3, the Dual Minimum Ratio Test says to only consider columns with a negative
+  entry in that row. Thus column 3 is not considered. $|\frac{1}{-2}| < |\frac{6}{-1}|$ therefore
+  column 2 is selected. 
+  
+   Pivot at row $3$, column $2$
+   \begin{center}
+  \begin{tabular}{c | c | c c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $RHS$ \\ \hline
+           & $-1$ & $11/2$ & $0$ & $5/2$ & $0$ & $0$ & $1/2$ & $-1/2$ \\ \hline
+  $x_4$ & $0$ & $-5/2$ & $0$ & $-3/2$ & $1$ & $0$ & $-1/2$ & $-3/2$ \\
+  $x_5$ & $0$ & $-3/2$ & $0$ & $-1/2$ & $0$ & $1$ & $1/2$ & $1/2$ \\
+  $x_2$ & $0$ & $1/2$ & $1$ & $-1/2$ & $0$ & $0$ & $-1/2$ & $1/2$
+  \end{tabular}
+  \end{center}  
+  
+  The basic solution still is not feasible because of the negative entry in the final column of row 1.
+  For pivoting on row 1, the Dual Minimum Ratio Test says to choose column 6 since 
+  $|\frac{1/2}{-1/2}| < |\frac{5/2}{-3/2}|$ and $|\frac{1/2}{-1/2}| < |\frac{11/2}{-5/2}|$.
+  \pagebreak
+  
+  Pivot at row $1$, column $6$
+   \begin{center}
+  \begin{tabular}{c | c | c c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $RHS$ \\ \hline
+           & $-1$ & $3$ & $0$ & $1$ & $1$ & $0$ & $0$ & $-2$ \\ \hline
+  $x_6$ & $0$ & $5$ & $0$ & $3$ & $-2$ & $0$ & $1$ & $3$ \\
+  $x_5$ & $0$ & $-4$ & $0$ & $-2$ & $1$ & $1$ & $0$ & $-1$ \\
+  $x_2$ & $0$ & $3$ & $1$ & $1$ & $-1$ & $0$ & $0$ & $2$
+  \end{tabular}
+  \end{center}  
+  Applying similar reasoning,
+  
+  Pivot at row $2$, column $3$
+  \begin{center}
+  \begin{tabular}{c | c | c c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $RHS$ \\ \hline
+           & $-1$ & $1$ & $0$ & $0$ & $3/2$ & $1/2$ & $0$ & $-5/2$ \\ \hline
+  $x_6$ & $0$ & $-1$ & $0$ & $0$ & $-1/2$ & $3/2$ & $1$ & $3/2$ \\
+  $x_3$ & $0$ & $2$ & $0$ & $1$ & $-1/2$ & $-1/2$ & $0$ & $1/2$ \\
+  $x_2$ & $0$ & $1$ & $1$ & $0$ & $-1/2$ & $1/2$ & $0$ & $3/2$
+  \end{tabular}
+  \end{center}  
+  All entries in the final column are nonnegative. This tells us that the basic solution is now feasible
+  and thus also optimum (as the objective row entries are also nonnegative.) The Dual Simplex Algorithm 
+  terminates.
+  
+  The optimum solution is \{$x_1 = 0$, $x_2 = 3/2$, $x_3 = 1/2$\} with objective value $5/2$.
+   
+  
+  \pagebreak
+  \item
+  (a) The LP can be viewed as the maximization problem:
+  $$\mbox{Maximize } -z = -40x_1 - 30x_2 - 10x_3 - 1000a_1$$
+  subject to
+  $$x_1 + 2x_2 + 4x_3 + x_4 = 12$$
+  $$x_1 + x_2 + x_3 + a_1 = 6$$
+  $$x_1, x_2, x_3, x_4, a_1 \ge 0$$
+  where $x_4$ is a slack variable and $a_1$ is an artificial variable introduced so that we may have a valid starting basis for the 
+  simplex algorithm. The current tableau is thus
+   \begin{center}
+  \begin{tabular}{c | c | c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $a_1$ & $RHS$ \\ \hline
+           & $-1$ & $40$ & $30$ & $10$ & $0$ & $1000$ & $0$ \\ \hline
+  $x_4$ & $0$ & $1$ & $2$ & $4$ & $1$ & $0$ & $12$ \\
+  $a_1$ & $0$ & $1$ & $1$ & $1$ & $0$ & $1$ & $6$
+  \end{tabular}
+  \end{center}
+  The basis $\{x_4, a_1\}$ is not valid until after we perform Gaussian elimination to remove the $1000$ from the objective row.
+  The starting tableau is thus
+  \begin{center}
+  \begin{tabular}{c | c | c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $a_1$ & $RHS$ \\ \hline
+           & $-1$ & $-960$ & $-970$ & $-990$ & $0$ & $0$ & $-6000$ \\ \hline
+  $x_4$ & $0$ & $1$ & $2$ & $4$ & $1$ & $0$ & $12$ \\
+  $a_1$ & $0$ & $1$ & $1$ & $1$ & $0$ & $1$ & $6$
+  \end{tabular}
+  \end{center}
+  Pivot at row $2$, column $1$
+   \begin{center}
+  \begin{tabular}{c | c | c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $a_1$ & $RHS$ \\ \hline
+           & $-1$ & $0$ & $-10$ & $-30$ & $0$ & $960$ & $-240$ \\ \hline
+  $x_4$ & $0$ & $0$ & $1$ & $3$ & $1$ & $-1$ & $6$ \\
+  $x_1$ & $0$ & $1$ & $1$ & $1$ & $0$ & $1$ & $6$
+  \end{tabular}
+  \end{center}
+  Pivot at row $1$, column $3$
+   \begin{center}
+  \begin{tabular}{c | c | c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $a_1$ & $RHS$ \\ \hline
+           & $-1$ & $0$ & $0$ & $0$ & $10$ & $950$ & $-180$ \\ \hline
+  $x_3$ & $0$ & $0$ & $1/3$ & $1$ & $1/3$ & $-1/3$ & $2$ \\
+  $x_1$ & $0$ & $1$ & $2/3$ & $0$ & $-1/3$ & $4/3$ & $4$
+  \end{tabular}
+  \end{center}
+  This solution is optimal. However if we pivot at row $1$, column $2$, we get
+  \begin{center}
+  \begin{tabular}{c | c | c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $a_1$ & $RHS$ \\ \hline
+           & $-1$ & $0$ & $0$ & $0$ & $10$ & $950$ & $-180$ \\ \hline
+  $x_2$ & $0$ & $0$ & $1$ & $3$ & $1$ & $-1$ & $6$ \\
+  $x_1$ & $0$ & $1$ & $0$ & $-2$ & $-1$ & $2$ & $0$
+  \end{tabular}
+  \end{center}
+  The LP is degenerate with two possible solutions being \{$x_1 = 4$, $x_2 = 0$, $x_3 = 2$\} and \linebreak
+  \{$x_1 = 0$, $x_2 = 6$, $x_3 = 0$\}. In any case, the objective value is $180$.
+  \pagebreak
+  \item[3.] (b) The problem can be viewed as
+  $$\mbox{Maximize } z = 5x_1 + 4x_2 - Ma_1$$
+  subject to
+  $$3x_1 + 2x_2 + x_3 = 6$$
+  $$2x_1 - x_2 - x_4 + a_1 = 6$$
+  $$x_1, x_2, x_3, x_4, a_1 \ge 0$$
+  where $x_3$ is a slack variable, $x_4$ is a surplus variable, $a_1$ is an artificial variable, and 
+  $M$ is a large positive constant. This gives us the tableau
+  \begin{center}
+  \begin{tabular}{c | c | c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $a_1$ & $RHS$ \\ \hline
+           & $1$ & $-5$ & $-4$ & $0$ & $0$ & $M$ & $0$ \\ \hline
+  $x_3$ & $0$ & $3$ & $2$ & $1$ & $0$ & $0$ & $6$ \\
+  $a_1$ & $0$ & $2$ & $-1$ & $0$ & $-1$ & $1$ & $6$
+  \end{tabular}
+  \end{center}
+  Performing Gaussian elimination to get a valid basis gives us the starting tableau
+  \begin{center}
+  \begin{tabular}{c | c | c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $a_1$ & $RHS$ \\ \hline
+           & $1$ & $-5-2M$ & $M-4$ & $0$ & $M$ & $0$ & $-6M$ \\ \hline
+  $x_3$ & $0$ & $3$ & $2$ & $1$ & $0$ & $0$ & $6$ \\
+  $a_1$ & $0$ & $2$ & $-1$ & $0$ & $-1$ & $1$ & $6$
+  \end{tabular}
+  \end{center}
+  Since $M$ is a large positive constant, only the objective entry in column $1$ is negative.
+  Thus the next step is to pivot at row $1$, column $1$ which gives us
+   \begin{center}
+  \begin{tabular}{c | c | c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $a_1$ & $RHS$ \\ \hline
+           & $1$ & $0$ & $(7M - 2)/3$ & $(5 + 2M)/3$ & $M$ & $0$ & $10-2M$ \\ \hline
+  $x_1$ & $0$ & $1$ & $2/3$ & $1/3$ & $0$ & $0$ & $2$ \\
+  $a_1$ & $0$ & $0$ & $-7/3$ & $-2/3$ & $-1$ & $1$ & $2$
+  \end{tabular}
+  \end{center}
+  At this point the simplex algorithm would terminate since a large value for $M$ would cause all entries in
+  the objective row (with the exception of the objective value) to be nonnegative. 
+  However the artificial variable $a_1$ is part of the basis if $M$ is sufficiently large. 
+  This implies that there are no feasible solutions to the LP.
+  
+  \end{enumerate}
+\end{document}

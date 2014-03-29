@@ -1,0 +1,256 @@
+\documentclass{article}[12pt,a4paper]
+%\usepackage{a4wide}
+\usepackage{fullpage}
+\usepackage{tikz}
+
+\title{MA372 Submission Problems}
+\author{Richard Douglas}
+\date{March 21,  2014}
+
+\begin{document}
+  \maketitle
+  \begin{enumerate}
+	  \item \textbf{Decision Variables}:
+	  \begin{itemize}
+	  \item $\mathbf{x_1}$: the units of toy 1 produced before Christmas
+	  \item $\mathbf{x_2}$: the units of toy 2 produced before Christmas 
+	  \item $\mathbf{y_1}$: a binary variable corresponding to the decision to produce toy 1 
+	  \item $\mathbf{y_2}$: a binary variable corresponding to the decision to produce toy 2
+	  \item $\mathbf{y_3}$: a binary variable corresponding to the decision to use factory 1 (factory 2 is used if $y_3$ is 0)
+	  \end{itemize}
+	  
+	  \textbf{Objective Function}: \newline
+	  We wish to maximize the profit generated (in \$) by the toys produced before Christmas. 
+	  $$z = 10x_1 + 15x_2 - 50000y_1 - 80000y_2$$
+	  
+	   \textbf{Contraints}: \newline
+	   $$x_1 \le My_1$$
+	   $$x_2 \le My_2$$
+	   $$y_i \in \{ 0, 1 \} \mbox{ for } i = 1, 2, 3$$
+	   $$50x_1 + 40x_2 \le 500 + M(1 - y_3)$$
+	   $$40x_1 + 25x_2 \le 700 + My_3$$
+	   $$x_1, x_2 \ge 0$$
+	   \hfill (where $M$ is a large positive constant)
+	   
+	   \textbf{Comment:} \newline
+	   It may also make sense to impose $x_1$ and $x_2$ being integers as a constraint however if we solve the linear program, 
+	   then the optimum solution will  have them in the thousands (in order to deal with the startup costs) so rounding to the 
+	   nearest integer would give us the solution to the corresponding integer program. 
+	   \pagebreak
+	   
+	   \item \section*{LP Relaxation}
+	   \textbf{Optimum Tableau:}
+	   \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $0$ & $1/5$     & $6/5$               & $73/5$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $9/5$  & $-1/5$         & $17/5$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $1/5$  & $1/5$         & $13/5$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $0$    & $-4/5$ & $1/5$         & $8/5$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	  \textbf{Optimal Objective Value:} $z = 73/5$
+  	  
+  	  \noindent \textbf{Optimum Solution:} $x_1 = 13/5$, $x_2 = 8/5$
+  	  
+  	  \noindent We can now branch with $x_2 \le 1$ (Subproblem 1) and $x_2 \ge 2$ (Subproblem 2).
+  	  
+  	  \textbf{Current Best $z$ Value:} $-\infty$
+  	  
+  	  \section*{Subproblem 1}
+  	  \textbf{Post-Optimum Tableau in Standard Form:}
+  	  \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $0$ & $1/5$     & $6/5$ & $0$ & $73/5$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $9/5$  & $-1/5$ & $0$ & $17/5$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $1/5$  & $1/5$ & $0$ & $13/5$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $0$    & $-4/5$ & $1/5$ & $0$ & $8/5$ \\
+  			$x_6$ & $0$ & $0$ & $0$ &   $0$    & $4/5$ & $-1/5$ & $1$ & $-3/5$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	  The optimum solution is no longer feasible, the dual simplex algorithm is now used. 
+  	  
+  	  \noindent \textbf{Pivot at Row 4, Column 5:}
+  	  \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $0$ & $5$     & $0$ & $6$ & $11$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $1$  & $0$ & $-1$ & $4$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $1$  & $0$ & $1$ & $2$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $0$    & $0$ & $0$ & $1$ & $1$ \\
+  			$x_5$ & $0$ & $0$ & $0$ &   $0$    & $-4$ & $1$ & $-5$ & $3$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	   \textbf{Optimal Objective Value:} $z = 11$
+  	  
+  	  \noindent \textbf{Optimum Solution:} $x_1 = 2$, $x_2 = 1$
+  	  
+  	  \noindent This subproblem has an integer solution with an objective value greater than the current best $z$ value.
+  	  The subproblem is thus fathomed and the current best $z$ value is updated.
+  	  
+  	  \textbf{Current Best $z$ Value:} $11$
+  	  
+  	  \pagebreak
+  	  
+  	  \noindent \section*{Subproblem 2}
+  	  \textbf{Post-Optimum Tableau in Standard Form:}
+  	  \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $0$ & $1/5$     & $6/5$ & $0$ & $73/5$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $9/5$  & $-1/5$ & $0$ & $17/5$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $1/5$  & $1/5$ & $0$ & $13/5$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $0$    & $-4/5$ & $1/5$ & $0$ & $8/5$ \\
+  			$x_5$ & $0$ & $0$ & $0$ &   $0$    & $-4/5$ & $1/5$ & $1$ & $-2/5$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	  The optimum solution is no longer feasible, the dual simplex algorithm is now used. 
+  	  
+  	   \noindent \textbf{Pivot at Row 4, Column 4:}
+  	  \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $0$ & $0$     & $5/4$ & $1/4$ & $29/2$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $0$  & $1/4$ & $9/4$ & $5/2$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $0$  & $1/4$ & $1/4$ & $5/2$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $0$    & $0$ & $0$ & $-1$ & $2$ \\
+  			$x_4$ & $0$ & $0$ & $0$ &   $0$    & $1$ & $-1/4$ & $-5/4$ & $1/2$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	  
+  	   \textbf{Optimal Objective Value:} $z = 29/2$
+  	  
+  	  \noindent \textbf{Optimum Solution:} $x_1 = 5/2$, $x_2 = 2$
+  	  
+  	  \noindent The solution is not a feasible solution to the IP and the optimal value is greater than the current best $z$ value.
+  	  The subproblem is thus not fathomed and we can now branch with 
+  	  $x_1 \le 2$ (Subproblem 3) and $x_1 \ge 3$ (Subproblem 4).
+  	  
+  	  \noindent \textbf{Current Best $z$ Value:} $11$
+  	  
+  	   \noindent \section*{Subproblem 3}
+  	  \textbf{Post-Optimum Tableau in Standard Form:}
+  	  \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $x_7$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $0$ & $0$     & $5/4$ & $1/4$ & $0$ & $29/2$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$ & $1$   & $0$    & $1/4$  & $9/4$ & $0$ & $5/2$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $0$  & $1/4$ & $1/4$ & $0$ & $5/2$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $0$    & $0$ & $0$ & $-1$ & $0$ & $2$ \\
+  			$x_4$ & $0$ & $0$ & $0$ &   $0$    & $1$ & $-1/4$ & $-5/4$ & $0$ & $1/2$ \\
+  			$x_7$ & $0$ & $0$ & $0$ &   $0$    & $0$ & $-1/4$ & $-1/4$ & $1$ & $-1/2$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	  The optimum solution is no longer feasible, the dual simplex algorithm is now used. 
+  	  
+  	  \noindent \textbf{Pivot at Row 5, Column 6} and then \textbf{Pivot at Row 1, Column 5:}
+  	  \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $x_7$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $1/2$ & $0$     & $0$ & $0$ & $11/2$ & $13$  \\ \hline
+  			$x_5$ & $0$ & $0$ & $0$ & $-1/2$   & $0$    & $1$  & $0$ & $-9/2$ & $1$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $0$      & $0$ & $0$ & $1$ & $2$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $1/2$    & $0$ & $0$ & $0$ & $1/2$ & $3$ \\
+  			$x_4$ & $0$ & $0$ & $0$ &   $1/2$    & $1$ & $0$ & $0$ & $-1/2$ & $2$ \\
+  			$x_6$ & $0$ & $0$ & $0$ &   $1/2$    & $0$ & $0$ & $1$ & $1/2$ & $1$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	  \pagebreak
+  	  
+  	   \textbf{Optimal Objective Value:} $z = 13$
+  	  
+  	  \noindent \textbf{Optimum Solution:} $x_1 = 2$, $x_2 = 3$
+  	  
+  	  \noindent This subproblem has an integer solution with an objective value greater than the current best $z$ value.
+  	  The subproblem is thus fathomed and the current best $z$ value is updated.
+  	  
+  	  \noindent \textbf{Current Best $z$ Value:} $13$
+  	  
+  	   \noindent \section*{Subproblem 4}
+  	   In this subproblem we add the constraint $x_1 \ge 3$ but this along with the constraint $x_2 \ge 2$
+  	   imply that the constraint $4x_1 + x_2 \le 12$ is violated. Thus Subproblem 4 is infeasible and therefore fathomed.
+  	   
+  	   \noindent \section*{Conclusion}
+  	   The optimum solution to the IP is $x_1 = 2, x_2 = 3$ with the objective function taking optimal value $13$.
+  	   
+  	   \noindent \section*{Sketch}
+  	   \begin{figure}[!htb]
+    		\centering
+    		\includegraphics[width = \textwidth, height = 0.5\textheight]{./"images/branch and bound"}
+  	  \end{figure}
+  	  \noindent The preceding sketch was drawn using the now deprecated 
+  	  \textit{tikz-quick-and-dirty-screenshots-with-mspaint} package.
+  	  
+  	  \pagebreak
+  	  
+  	  \item
+  	  (a) Each row (including the objective row) of the optimum tableau has a righthandside value that is not an integer,
+  	  and therefore a cutting plane. The cutting planes are
+  	  $$\frac{1}{5}x_4 + \frac{1}{5}x_5 \ge \frac{3}{5} \mbox{ for the objective row}$$
+  	  $$\frac{4}{5}x_4 + \frac{4}{5}x_5 \ge \frac{2}{5}\mbox{ for row } 1$$
+  	  $$\frac{1}{5}x_4 + \frac{1}{5}x_5 \ge \frac{3}{5} \mbox{ for row } 2$$
+  	  $$\frac{1}{5}x_4 + \frac{1}{5}x_5 \ge \frac{3}{5} \mbox{ for row } 3$$
+  	  Thus, there are two distinct valid cutting planes:
+  	  $$\frac{1}{5}x_4 + \frac{1}{5}x_5 \ge \frac{3}{5} \mbox{ and } \frac{4}{5}x_4 + \frac{4}{5}x_5 \ge \frac{2}{5}$$
+  	  
+  	  \noindent (b)
+  	  
+  	  \section*{$\mathbf{\frac{1}{5}x_4 + \frac{1}{5}x_5 \ge \frac{3}{5}}$}
+  	  
+  	  \textbf{Post-Optimum Tableau in Standard Form:}
+  	  \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $0$ & $1/5$     & $6/5$ & $0$ & $73/5$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $9/5$  & $-1/5$ & $0$ & $17/5$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $1/5$  & $1/5$ & $0$ & $13/5$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $0$    & $-4/5$ & $1/5$ & $0$ & $8/5$ \\
+  			$x_6$ & $0$ & $0$ & $0$ &   $0$    & $-1/5$ & $-1/5$ & $1$ & $-3/5$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	  
+  	  \noindent \textbf{Pivot at Row 4, Column 4} and then \textbf{Pivot at Row 1, Column 5:}
+  	   \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $1/2$ & $0$     & $0$ & $11/2$ & $13$  \\ \hline
+  			$x_5$ & $0$ & $0$ & $0$   & $-1/2$    & $0$  & $1$ & $-9/2$ & $1$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $0$  & $0$ & $1$ & $2$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $1/2$    & $0$ & $0$ & $1/2$ & $3$ \\
+  			$x_4$ & $0$ & $0$ & $0$ &   $1/2$    & $1$ & $0$ & $-1/2$ & $2$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	  
+  	  \noindent \textbf{Optimum Solution:} $x_1 = 2, x_2 = 3$ with the objective function taking optimal value $13$. 
+  	  
+  	  \noindent \section*{$\mathbf{\frac{4}{5}x_4 + \frac{4}{5}x_5 \ge \frac{2}{5}}$}
+  	  
+  	  \textbf{Post-Optimum Tableau in Standard Form:}
+  	  \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $0$ & $1/5$     & $6/5$ & $0$ & $73/5$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $9/5$  & $-1/5$ & $0$ & $17/5$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $1/5$  & $1/5$ & $0$ & $13/5$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $0$    & $-4/5$ & $1/5$ & $0$ & $8/5$ \\
+  			$x_6$ & $0$ & $0$ & $0$ &   $0$    & $-4/5$ & $-4/5$ & $1$ & $-2/5$ \\
+  	  \end{tabular}
+  	  \end{center}
+  	  
+  	  \noindent \textbf{Pivot at Row 4, Column 4:}
+  	   \begin{center}
+ 	   \begin{tabular}{c | c | c c c c c c | c}
+            		Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  			           & $1$ & $0$ & $0$   & $0$ & $0$     & $1$ & $1/4$ & $29/2$  \\ \hline
+  			$x_3$ & $0$ & $0$ & $0$   & $1$    & $0$  & $-2$ & $9/4$ & $5/2$ \\
+  			$x_1$ & $0$ & $1$ & $0$  &  $0$    & $0$  & $0$ & $1/4$ & $5/2$ \\
+  			$x_2$ & $0$ & $0$ & $1$ &   $0$    & $0$ & $1$ & $-1$ & $2$ \\
+  			$x_4$ & $0$ & $0$ & $0$ &   $0$    & $1$ & $1$ & $-5/4$ & $1/2$ \\
+  	  \end{tabular}
+  	  \end{center}
+	  
+  	  \noindent \textbf{Optimum Solution:} $x_1 = 5/2, x_2 = 2$ with the objective function taking optimal value $29/2$. 
+  	  
+  \end{enumerate}
+\end{document}

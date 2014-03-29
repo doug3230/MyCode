@@ -1,0 +1,357 @@
+\documentclass{article}[12pt,a4paper]
+%\usepackage{a4wide}
+\usepackage{fullpage}
+\usepackage{tikz}
+
+\title{MA372 Submission Problems}
+\author{Richard Douglas}
+\date{February 7,  2014} %defaults to \today
+
+\begin{document}
+  \maketitle
+  \begin{enumerate}
+	\item This problem is a continuation of the Submission Problem from the January 10 Study Guide.
+	
+	(a) Several customers have complained that the ultra-condensed broth is too sweet, so
+	the company has altered the recipe to use fewer carrots, and more onions. Specifically, 
+	the recipe for ultra-condensed broth now calls for 800 grams of each of the
+	three vegetables. With this new recipe, is the optimum basis for the problem still
+	optimum? If so, determine the new optimum solution and objective value.
+	
+	(b) The company has neglected to account for the need to package the broth in its
+	original description of the problem. An automated canning machine is used to
+	package both the three types of vegetable broth, as well as other products produced
+	by the company. The company has allocated enough time on this machine to package
+	3 litres of broth per hour. Let $x_7$ denote the slack variable for this new constraint.
+	Determine whether adding $x_7$ to the optimum basis for the original problem results
+	in an optimum basis, and if so, determine the new optimum solution and objective
+	value.
+	
+	\item Solve the following linear program using the Revised Simplex Algorithm, showing all steps:
+	
+	\begin{center} Maximize $z = 6x_1 + 10x_2 + 34x_3$ \end{center}
+	subject to 
+	$$2x_1 + 5x_2 + 8x_3 \le 18$$
+	$$2x_1 + 4x_2 + 10x_3 \le 16$$
+	$$x_1 + 3x_2 + 7x_3 \le 10$$
+	$$x_i \ge 0 \mbox{ for } 1 \le i \le 3$$
+	
+	\item 
+	(a) Let (P) be a linear program in standard form, with objective function $z$, and let
+	(D) be its dual, with objective function $w$. Prove that if \textbf{x} is any feasible solution
+	to (P), and \textbf{y} is any feasible solution to (D), then $z(\mathbf{x}) \le w(\mathbf{y})$. (This is called the
+	Weak LP Duality Property.)
+	
+	(b) Consider the following linear program:
+	
+	\begin{center}Maximize $z = 2x_1 + x_2$\end{center}
+	subject to
+	$$-x_1 - 2x_2 \le −2$$
+	$$-x_1 + 3x_2 \le 6$$
+	$$x_1 - 4x_2 \le 4$$
+	$$x_1 ,x_2 \ge 0$$
+	
+	Prove that there are no feasible solutions to the dual of this problem.
+  \end{enumerate}
+  \pagebreak
+  \begin{enumerate}
+  \item The starting tableau for the original problem is
+  
+  \begin{center}
+  \begin{tabular}{l | c | c c c c c c | c}
+  Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+           & $1$ & $-6$ & $-10$  & $-34$  & $0$    & $0$     & $0$      & $0$  \\ \hline
+  	$x_4$ & $0$ & $2$ & $5$   & $8$    & $1$      & $0$     & $0$     & $18$ \\
+  	$x_5$ & $0$ & $2$ & $4$  & $10$    & $0$      & $1$     & $0$     & $16$ \\
+  	$x_6$ & $0$ & $1$ & $3$ & $7$    & $0$      & $0$     & $1$     & $10$ \\
+  \end{tabular}
+  \end{center}
+  
+  After the Simplex algorithm is performed, we reach the final tableau
+  \begin{center}
+ \begin{tabular}{l | c | c c c c c c | c}
+            Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  	     & $1$ & $0$ & $4$   & $0$ & $0$  & $2$     & $2$     & $52$  \\ \hline
+  	$x_4$ & $0$ & $0$ & $2$   & $0$    & $1$      & $-3/2$     & $1$     & $4$ \\
+  	$x_1$ & $0$ & $1$ & $-1/2$  & $0$    & $0$      & $7/4$     & $-5/2$     & $3$ \\
+  	$x_3$ & $0$ & $0$ & $1/2$ & $1$    & $0$      & $-1/4$     & $1/2$     & $1$ \\
+  \end{tabular}
+  \end{center}
+  
+  With fundamental insight matrices
+  $$A = \left[ \begin{tabular}{c c c}
+  	$2$ & $5$ & $8$ \\
+  	$2$ & $4$ & $10$ \\
+  	$1$ & $3$ & $7$ 
+  	\end{tabular} \right] \mbox{, }
+  M = \left[ \begin{tabular}{c c c}
+  	$1$ & $-3/2$ & $1$ \\
+  	$0$ & $7/4$ & $-5/2$ \\
+  	$0$ & $-1/4$ & $1/2$ 
+  	\end{tabular} \right]$$
+  	
+ $$c = \left[ \begin{tabular}{c c c}
+  	$6$ & $10$ & $34$
+  	\end{tabular} \right]
+  	\mbox{, }
+ 	c_B = \left[ \begin{tabular}{c c c}
+  	$0$ & $6$ & $34$
+  	\end{tabular} \right]
+  	\mbox{, }
+  	y = \left[ \begin{tabular}{c c c}
+  	$0$ & $2$ & $2$
+  	\end{tabular} \right]$$
+  	
+  (a) The change in the recipe for ultra-condensed broth changes the constraint matrix to
+  $$A' = \left[ \begin{tabular}{c c c}
+  	$2$ & $5$ & $8$ \\
+  	$2$ & $4$ & $8$ \\
+  	$1$ & $3$ & $8$ 
+  	\end{tabular} \right]$$
+  	
+  Still using the original $M$ matrix,
+  $$MA' = \left[ \begin{tabular}{c c c}
+  	$0$ & $2$ & $4$ \\
+  	$1$ & $-1/2$ & $-6$ \\
+  	$0$ & $1/2$ & $2$ 
+  	\end{tabular} \right]
+  \mbox{, }
+  c_B M A' - c = 
+  	\left[ \begin{tabular}{c c c}
+  	$0$ & $4$ & $-2$
+  	\end{tabular} \right]$$
+  	
+  Giving us the tableau
+  \begin{center}
+ \begin{tabular}{l | c | c c c c c c | c}
+            Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  	     & $1$ & $0$ & $4$   & $-2$ & $0$  & $2$     & $2$     & $52$  \\ \hline
+  	$x_4$ & $0$ & $0$ & $2$   & $4$    & $1$      & $-3/2$     & $1$     & $4$ \\
+  	$x_1$ & $0$ & $1$ & $-1/2$  & $-6$    & $0$      & $7/4$     & $-5/2$     & $3$ \\
+  	$x_3$ & $0$ & $0$ & $1/2$ & $2$    & $0$      & $-1/4$     & $1/2$     & $1$ \\
+  \end{tabular}
+  \end{center}
+  
+  Pivoting at row $3$, column $3$ gives us
+  \begin{center}
+ \begin{tabular}{l | c | c c c c c c | c}
+            Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & RHS \\ \hline
+  	           & $1$ & $0$ & $9/2$ & $0$   & $0$       & $7/4$     & $5/2$ & $53$  \\ \hline
+  	$x_4$ & $0$ & $0$ & $1$     & $0$   & $1$      & $-1$     & $0$     & $2$ \\
+  	$x_1$ & $0$ & $1$ & $1$    & $0$    & $0$      & $1$     & $-1$     & $6$ \\
+  	$x_3$ & $0$ & $0$ & $1/4$ & $1$    & $0$      & $-1/8$     & $1/4$     & $1/2$ \\
+  \end{tabular}
+  \end{center}
+  
+  The RHS column and objective coefficients are still nonnegative. Thus the optimum basis is
+  still optimum. The new optimum solution is $x_1 = 6$, $x_2 = 0$, $x_3 = 1/2$ with objective
+  value 53.
+  \pagebreak
+  
+  (b) The new constraint for canning is
+  $$x_1 + x_2 + x_3 \le 3$$
+  Converted to equality with slack variable $x_7$, this constraint becomes
+  $$x_1 + x_2 + x_3 + x_7 = 3$$
+  The tableau becomes
+  \begin{center}
+ \begin{tabular}{l | c | c c c c c c c | c}
+            Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $x_7$ & RHS \\ \hline
+  	     & $1$ & $0$ & $4$   & $0$ & $0$  & $2$     & $2$ & $0$  & $52$  \\ \hline
+  	$x_4$ & $0$ & $0$ & $2$ & $0$ & $1$ & $-3/2$  & $1$ & $0$ & $4$ \\
+  	$x_1$ & $0$ & $1$ & $-1/2$ & $0$ & $0$ & $7/4$ & $-5/2$ & $0$ & $3$ \\
+  	$x_3$ & $0$ & $0$ & $1/2$ & $1$    & $0$      & $-1/4$     & $1/2$ & $0$     & $1$ \\
+  	$x_7$ & $0$ & $1$ & $1$ & $1$ & $0$ & $0$ & $0$ & $1$  & $3$
+  \end{tabular}
+  \end{center}
+  Pivoting on columns 1 and 3 yields
+   \begin{center}
+ \begin{tabular}{l | c | c c c c c c c | c}
+            Basis & $z$ & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $x_7$ & RHS \\ \hline
+  	     & $1$ & $0$ & $4$   & $0$ & $0$  & $2$     & $2$ & $0$  & $52$  \\ \hline
+  	$x_4$ & $0$ & $0$ & $2$ & $0$ & $1$ & $-3/2$  & $1$ & $0$ & $4$ \\
+  	$x_1$ & $0$ & $1$ & $-1/2$ & $0$ & $0$ & $7/4$ & $-5/2$ & $0$ & $3$ \\
+  	$x_3$ & $0$ & $0$ & $1/2$ & $1$    & $0$      & $-1/4$     & $1/2$ & $0$     & $1$ \\
+  	$x_7$ & $0$ & $0$ & $1$ & $0$ & $0$ & $-3/2$ & $2$ & $1$  & $-1$
+  \end{tabular}
+  \end{center}
+  The basic solution is no longer feasible as $x_7$ is negative. 
+  This means that this basis is not optimum. 
+  \pagebreak
+  \item
+  \textbf{LP Matrices:}
+  $$A = \left[ \begin{tabular}{c c c}
+  	$2$ & $5$ & $8$ \\
+  	$2$ & $4$ & $10$ \\
+  	$1$ & $3$ & $7$ 
+  	\end{tabular} \right]
+  	\mbox{, }
+  	b = \left[ \begin{tabular}{c}
+  	$18$ \\
+  	$16$ \\
+  	$10$ 
+  	\end{tabular} \right]
+  	\mbox{, }
+  	c = \left[ \begin{tabular}{c c c}
+  	$6$ & $10$ & $34$  
+  	\end{tabular} \right]$$
+  
+  \textbf{Initially:}
+   $$M = \left[ \begin{tabular}{c c c}
+  	$1$ & $0$ & $0$ \\
+  	$0$ & $1$ & $0$ \\
+  	$0$ & $0$ & $1$ 
+  	\end{tabular} \right]
+  	\mbox{, }
+  	c_B = \left[ \begin{tabular}{c c c}
+  	$0$ & $0$ & $0$
+  	\end{tabular} \right]
+  	\mbox{, Basis: }
+  	\{x_4, x_5, x_6\}$$
+
+  \textbf{Iteration 1:}
+  $$c_BMA - c = \left[ \begin{tabular}{c c c}
+  $-6$ & $-10$ & $-34$  
+  \end{tabular} \right]
+  \mbox{, }
+  c_BM = \left[ \begin{tabular}{c c c}
+  	$0$ & $0$ & $0$
+  	\end{tabular} \right]
+  $$
+  Entering variable: $x_1$
+  $$MA_1 = \left[ \begin{tabular}{c}
+  	$2$ \\
+  	$2$ \\
+  	$1$ 
+  	\end{tabular} \right]
+  	\mbox{, }
+  	Mb = \left[ \begin{tabular}{c}
+  	$18$ \\
+  	$16$ \\
+  	$10$ 
+  	\end{tabular} \right]
+  	\mbox{, }$$
+  Leaving variable: $x_5$
+  $$
+   \left[ \begin{tabular}{c | c c c}
+  	$2$ & $1$ & $0$ & $0$ \\
+  	$2$ & $0$ & $1$ & $0$ \\
+  	$1$ & $0$ & $0$ & $1$ 
+  	\end{tabular} \right]
+  	\rightarrow
+   \left[ \begin{tabular}{c | c c c}
+  	$0$ & $1$ & $-1$ & $0$ \\
+  	$1$ & $0$ & $1/2$ & $0$ \\
+  	$0$ & $0$ & $-1/2$ & $1$ 
+  	\end{tabular} \right]
+  $$
+  Result:
+   $$M = \left[ \begin{tabular}{c c c}
+  	$1$ & $-1$ & $0$ \\
+  	$0$ & $1/2$ & $0$ \\
+  	$0$ & $-1/2$ & $1$ 
+  	\end{tabular} \right]
+  	\mbox{, }
+  	c_B = \left[ \begin{tabular}{c c c}
+  	$0$ & $6$ & $0$
+  	\end{tabular} \right]
+  	\mbox{, Basis: }
+  	\{x_4, x_1, x_6\}$$
+  
+  \textbf{Iteration 2:}
+   $$c_BMA - c = \left[ \begin{tabular}{c c c}
+  $0$ & $2$ & $-4$  
+  \end{tabular} \right]
+  \mbox{, }
+  c_BM = \left[ \begin{tabular}{c c c}
+  	$0$ & $3$ & $0$
+  	\end{tabular} \right]
+  $$
+   Entering variable: $x_3$
+  $$MA_3 = \left[ \begin{tabular}{c}
+  	$-2$ \\
+  	$5$ \\
+  	$2$ 
+  	\end{tabular} \right]
+  	\mbox{, }
+  	Mb = \left[ \begin{tabular}{c}
+  	$2$ \\
+  	$8$ \\
+  	$2$ 
+  	\end{tabular} \right]
+  	\mbox{, }$$
+  Leaving variable: $x_6$
+  $$
+   \left[ \begin{tabular}{c | c c c}
+  	$-2$ & $1$ & $-1$ & $0$ \\
+  	$5$ & $0$ & $1/2$ & $0$ \\
+  	$2$ & $0$ & $-1/2$ & $1$ 
+  	\end{tabular} \right]
+  	\rightarrow
+   \left[ \begin{tabular}{c | c c c}
+  	$0$ & $1$ & $-3/2$ & $1$ \\
+  	$0$ & $0$ & $7/4$ & $-5/2$ \\
+  	$1$ & $0$ & $-1/4$ & $1/2$ 
+  	\end{tabular} \right]
+  $$
+  Result:
+   $$M = \left[ \begin{tabular}{c c c}
+  	$1$ & $-3/2$ & $1$ \\
+  	$0$ & $7/4$ & $-5/2$ \\
+  	$0$ & $-1/4$ & $1/2$ 
+  	\end{tabular} \right]
+  	\mbox{, }
+  	c_B = \left[ \begin{tabular}{c c c}
+  	$0$ & $6$ & $34$
+  	\end{tabular} \right]
+  	\mbox{, Basis: }
+  	\{x_4, x_1, x_3\}$$
+  
+  \textbf{Iteration 3:}
+   $$c_BMA - c = \left[ \begin{tabular}{c c c}
+  $0$ & $4$ & $0$  
+  \end{tabular} \right]
+  \mbox{, }
+  c_BM = \left[ \begin{tabular}{c c c}
+  	$0$ & $2$ & $2$
+  	\end{tabular} \right]
+  $$
+  Algorithm terminated. \newline
+  
+  \textbf{Optimum solution:}
+  $$Mb = \left[ \begin{tabular}{c}
+  	$4$ \\
+  	$3$ \\
+  	$1$ 
+  	\end{tabular} \right]
+  	\mbox{, }
+  	x_1 = 3, x_2 =0, x_3 = 1$$
+  \textbf{Objective value:}
+  $$c_BMb = 52$$
+  \pagebreak
+  \item
+  (a) Suppose that \textbf{x} is a feasible solution for (P).  This implies $A\mathbf{x} \le b$ and $\mathbf{x} \ge 0$.
+  
+  Suppose also that \textbf{y} is a feasible solution for (D). This implies $\mathbf{y}A \ge c$ and $\mathbf{y} \ge 0$.
+  
+  Therefore
+  $$w(\mathbf{y}) = \mathbf{y}b \ge \mathbf{y}(A\mathbf{x}) = (\mathbf{y}A)\mathbf{x} \ge c\mathbf{x} = z(\mathbf{x})$$
+  
+  Thus a feasible solution for (D) can be used to obtain an upper bound on the objective value for (P). \newline
+  
+  (b) The dual problem to this LP is
+  
+  \begin{center} Minimize $w = -2y_1 + 6y_2 + 4y_3$\end{center}
+  subject to
+  $$-y_1 - y_2 + y_3 \ge 2$$
+  $$-2y_1 + 3y_2 - 4y_3 \ge 1$$
+  $$y_1, y_2, y_3 \ge 0$$
+  If the first two inequalities hold, then we can add 3 times the first to the second to get
+  $$-5y_1 - y_3 \ge 7$$
+  but this is impossible since $y_1$ and $y_3$ are both nonnegative. 
+  
+  Thus the structural constraints imply that the nonnegativity constraints do not hold.
+  
+  Thus there are no feasible solutions to the dual problem.
+  
+  \end{enumerate}
+\end{document}
