@@ -1,0 +1,4 @@
+Throughout this phase, I have made use of the following resources:
+
+Subtitle Hack
+http://tex.stackexchange.com/questions/50182/subtitle-with-the-maketitle-page
