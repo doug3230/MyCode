@@ -9,6 +9,10 @@ piece of software I've ever written. In this project, I intend to use what
 I've learned in a software engineering course to carry out the project
 more effectively.
 
+Project Status: On hold. I have final exams to take care of. Also, if anyone could
+point me to a good tutorial on branching in Github (something which I should be definitely
+using here while the project is still in development) that would be fantastic.
+
 The folders and what is to be in them are as follows:
 
 Requirements - This will include a requirements analysis of the project.
